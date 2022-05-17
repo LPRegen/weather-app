@@ -3,6 +3,7 @@ import { weatherInformation } from './model';
 const View = (function () {
   const _topContainer = document.querySelector('.top-container');
   const _currentTemp = document.querySelector('.current-feels-temp');
+  const _hourlyCards = document.querySelector('.cards');
   const _dailyDetailsContainer = document.querySelector('.daily-details');
 
   const clearContent = function () {
@@ -70,7 +71,7 @@ const View = (function () {
     feelsLikeTemp.classList.add('feels-temp');
     smallCurrent.classList.add('small');
     smallFeels.classList.add('small');
-    currentTemp.textContent = `${roundedTemp[0]}°C`;
+    currentTemp.textContent = `${roundedTemp[0]} °C`;
     feelsLikeTemp.textContent = `${roundedTemp[1]} °C`;
     smallCurrent.textContent = 'Current temperature';
     smallFeels.textContent = 'Feels like';
@@ -84,27 +85,45 @@ const View = (function () {
    * @param {number} minTemp Min temperature.
    * @return HTML element.
    */
-  const _createHourCard = function (hour, maxTemp, minTemp) {
-    const card = document.createElement('div');
-    const tempContainer = document.createElement('div');
-    const hourEl = document.createElement('p');
-    const maxTempEl = document.createElement('p');
-    const minTempEl = document.createElement('p');
+  const _createHourCard = function (hourlyObject) {
+    const title = document.createElement('h3');
+    title.classList.add('title-details');
+    title.textContent = 'Hourly details';
+    let cardElements = [];
 
-    tempContainer.append(maxTempEl, minTempEl);
-    card.append(hourEl, tempContainer);
+    const convertDT = function (dt) {
+      let fullDate = new Date(1000 * dt);
+      let hours = `${fullDate.getHours()}`;
+      let minutes = `0${fullDate.getMinutes()}`;
+      let amPm = hours >= 12 ? 'pm' : 'am';
+      return `${
+        hours < 10
+          ? `0${hours}:${minutes} ${amPm}`
+          : `${hours}:${minutes} ${amPm}`
+      }`;
+    };
 
-    hourEl.textContent = `${hour > 11 ? `${hour} pm` : `${hour} am`}`;
-    maxTempEl.textContent = `${maxTemp}`;
-    minTempEl.textContent = `${minTemp}`;
+    for (let i = 1; i < 8; i++) {
+      const card = document.createElement('div');
+      const tempContainer = document.createElement('div');
+      const hourEl = document.createElement('p');
+      const tempEl = document.createElement('p');
+      const feelsLikeEl = document.createElement('p');
+      tempContainer.append(tempEl, feelsLikeEl);
+      card.append(hourEl, tempContainer);
+      hourEl.textContent = `${convertDT(hourlyObject[i].dt)}`;
+      tempEl.textContent = `${Math.round(hourlyObject[i].temp)} °C`;
+      feelsLikeEl.textContent = `${Math.round(hourlyObject[i].feels_like)} °C`;
+      card.classList.add('hourly-details');
+      hourEl.classList.add('hour');
+      tempContainer.classList.add('hourly-min-max');
+      tempEl.classList.add('max-temp-hour');
+      feelsLikeEl.classList.add('min-temp-hour');
+      cardElements.push(card);
+    }
 
-    card.classList.add('hourly-details');
-    hourEl.classList.add('hour');
-    tempContainer.classList.add('hourly-min-max');
-    maxTempEl.classList.add('max-temp-hour');
-    minTempEl.classList.add('min-temp-hour');
-
-    return card;
+    _hourlyCards.insertAdjacentElement('afterbegin', title);
+    return cardElements;
   };
 
   function todaySection(weatherObj, cityName, countryName) {
@@ -115,8 +134,10 @@ const View = (function () {
       weatherObj.current.temp,
       weatherObj.current.feels_like
     );
+    let hourlyCards = _createHourCard(weatherObj.hourly);
     _topContainer.append(location, weatherDescription);
     currentTemperature.forEach((html) => _currentTemp.append(html));
+    hourlyCards.forEach((html) => _hourlyCards.append(html));
   }
 
   function tomorrowSection() {
