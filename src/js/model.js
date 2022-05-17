@@ -2,14 +2,14 @@
 
 const weatherInformation = (function () {
   const _apiKey = '7f1fbcd5b4f7fd4e0d1795060fcd8a3c';
-  let weatherInfo;
+  let locationInfo;
 
   /**
    * Fetch lat and lon based on cityName
    * @param  {string} cityName Name of the city
    * @return  {array} Array with coordinates.
    */
-  async function _getLocation(cityName) {
+  async function getLocation(cityName) {
     try {
       let response = await fetch(
         `http://api.openweathermap.org/geo/1.0/direct?q=${cityName},&limit=1&appid=${_apiKey}`,
@@ -20,7 +20,12 @@ const weatherInformation = (function () {
         dataResponse[0].lat.toFixed(2),
         dataResponse[0].lon.toFixed(2),
       ];
-      return coord;
+      return {
+        country: dataResponse[0].country,
+        cityName: dataResponse[0].name,
+        state: dataResponse[0].state,
+        latLon: coord,
+      };
     } catch (error) {
       console.log(error.message);
     }
@@ -31,14 +36,14 @@ const weatherInformation = (function () {
    * @param  {array} coord[0] latitude
    * @param  {array} coord[1] longitud
    */
-  async function _fetchData(coord) {
+  async function fetchData(coord) {
     try {
       let response = await fetch(
         `https://api.openweathermap.org/data/2.5/onecall?lat=${coord[0]}&lon=${coord[1]}&exclude=minutely&units=metric&appid=${_apiKey}`,
         { mode: 'cors' }
       );
       const dataResponse = await response.json();
-      return (weatherInfo = dataResponse);
+      return dataResponse;
     } catch (error) {
       console.log(error.message);
     }
@@ -46,16 +51,20 @@ const weatherInformation = (function () {
 
   async function requestData(cityName) {
     try {
-      let coord = await _getLocation(cityName);
-      return _fetchData(coord);
+      locationInfo = await getLocation(cityName);
+      console.log(locationInfo);
+
+      return fetchData(locationInfo.latLon);
     } catch (error) {
       console.log(error);
     }
   }
 
   return {
+    fetchData,
     requestData,
-    weatherInfo,
+    getLocation,
+    locationInfo,
   };
 })();
 
