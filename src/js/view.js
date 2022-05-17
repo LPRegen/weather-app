@@ -2,9 +2,13 @@ import { weatherInformation } from './model';
 
 const View = (function () {
   const _topContainer = document.querySelector('.top-container');
+  const _currentTemp = document.querySelector('.current-feels-temp');
+  const _dailyDetailsContainer = document.querySelector('.daily-details');
 
   const clearContent = function () {
     _topContainer.textContent = '';
+    _currentTemp.textContent = '';
+    // _dailyDetailsContainer.textContent = '';
   };
 
   /**
@@ -56,6 +60,23 @@ const View = (function () {
     return container;
   };
 
+  const _createCurrentTemp = function (currTemp, feelsTemp) {
+    const roundedTemp = [Math.round(currTemp), Math.round(feelsTemp)];
+    const currentTemp = document.createElement('h1');
+    const feelsLikeTemp = document.createElement('h2');
+    const smallCurrent = document.createElement('small');
+    const smallFeels = document.createElement('small');
+    currentTemp.classList.add('current-temp');
+    feelsLikeTemp.classList.add('feels-temp');
+    smallCurrent.classList.add('small');
+    smallFeels.classList.add('small');
+    currentTemp.textContent = `${roundedTemp[0]}°C`;
+    feelsLikeTemp.textContent = `${roundedTemp[1]} °C`;
+    smallCurrent.textContent = 'Current temperature';
+    smallFeels.textContent = 'Feels like';
+    return [currentTemp, feelsLikeTemp, smallCurrent, smallFeels];
+  };
+
   /**
    * Creates card with information by hours.
    * @param {Number} hour Hour.
@@ -90,12 +111,21 @@ const View = (function () {
     clearContent();
     let location = _createLocationContainer(cityName, countryName);
     let weatherDescription = _createWeatherDescription(weatherObj);
+    let currentTemperature = _createCurrentTemp(
+      weatherObj.current.temp,
+      weatherObj.current.feels_like
+    );
     _topContainer.append(location, weatherDescription);
+    currentTemperature.forEach((html) => _currentTemp.append(html));
   }
 
-  function tomorrowSection() {}
+  function tomorrowSection() {
+    // clearContent();
+  }
 
-  function sixDaysSection() {}
+  function sixDaysSection() {
+    // clearContent();
+  }
 
   return {
     clearContent,
