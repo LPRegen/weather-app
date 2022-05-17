@@ -1,54 +1,60 @@
 import { weatherInformation } from './model';
 
 const View = (function () {
-  const _icon = document.querySelector('#weather-icon');
-  const _cityCountryLocation = document.querySelector('#city-country-location');
-  const _displayedDate = document.querySelector('#date');
-  const _weatherDescription = document.querySelector('#weather-description');
+  const _topContainer = document.querySelector('.top-container');
 
-  /**
-   * Updates weather icon.
-   * @param  {object} weatherObj fetched weather object.
-   * @param {number} iconSize Specify icon size, options are 2 or 4, default is 4.
-   */
-  function getIconIdCurrent(currentInformation, iconSize = 4) {
-    let iconId = currentInformation.weather[0].icon;
-    _icon.src = `http://openweathermap.org/img/wn/${iconId}@${iconSize}x.png`;
-  }
+  const clearContent = function () {
+    _topContainer.textContent = '';
+  };
 
   /**
    * Updates displayed location and date.
    * @param {string} cityName City's name.
    * @param {string} countryName Country's name.
-   * @param {string} date Date.
+   * @returns {htmlElement} HTML element.
    */
-  const _updateDisplayedLocation = function (cityName, countryName) {
+  const _createLocationContainer = function (cityName, countryName) {
     let date = new Date();
     const options = {
       weekday: 'long',
       month: 'long',
       day: 'numeric',
     };
-
-    _cityCountryLocation.textContent = `${cityName}, ${countryName}`;
-    _displayedDate.textContent = `${date.toLocaleDateString(
+    const locationInfo = document.createElement('div');
+    const cityCountryLocation = document.createElement('p');
+    const dateElement = document.createElement('p');
+    locationInfo.append(cityCountryLocation, dateElement);
+    locationInfo.classList.add('location-info');
+    cityCountryLocation.id = 'city-country-location';
+    dateElement.id = 'date';
+    cityCountryLocation.textContent = `${cityName}, ${countryName}`;
+    dateElement.textContent = `${date.toLocaleDateString(
       navigator.language,
       options
     )}`;
+    return locationInfo;
   };
 
   /**
    * Updates displayed weather description.
    * @param {string} weatherObject Weather's object.
+   * @returns {htmlElement} HTML Element.
    */
-  const _updateWeatherDescription = function (weatherObject) {
-    _weatherDescription.textContent = weatherObject.weather[0].description;
+  const _createWeatherDescription = function (weatherObject) {
+    const container = document.createElement('div');
+    const description = document.createElement('p');
+    const weatherIcon = document.createElement('img');
+    container.append(description, weatherIcon);
+    container.classList.add('weather-details');
+    description.classList.add('weather-description');
+    description.id = 'weather-description';
+    weatherIcon.classList.add('weather-icon');
+    weatherIcon.alt = 'Weather icon.';
+    weatherIcon.id = 'weather-icon';
+    weatherIcon.src = `http://openweathermap.org/img/wn/${weatherObject.current.weather[0].icon}@4x.png`;
+    description.textContent = weatherObject.current.weather[0].description;
+    return container;
   };
-
-  async function updateWeatherDetails(locationInfo, weatherObject) {
-    _updateDisplayedLocation(locationInfo.cityName, locationInfo.country);
-    _updateWeatherDescription(weatherObject);
-  }
 
   /**
    * Creates card with information by hours.
@@ -57,7 +63,7 @@ const View = (function () {
    * @param {number} minTemp Min temperature.
    * @return HTML element.
    */
-  const createHourCard = function (hour, maxTemp, minTemp) {
+  const _createHourCard = function (hour, maxTemp, minTemp) {
     const card = document.createElement('div');
     const tempContainer = document.createElement('div');
     const hourEl = document.createElement('p');
@@ -80,9 +86,22 @@ const View = (function () {
     return card;
   };
 
+  function todaySection(weatherObj, cityName, countryName) {
+    clearContent();
+    let location = _createLocationContainer(cityName, countryName);
+    let weatherDescription = _createWeatherDescription(weatherObj);
+    _topContainer.append(location, weatherDescription);
+  }
+
+  function tomorrowSection() {}
+
+  function sixDaysSection() {}
+
   return {
-    getIconIdCurrent,
-    updateWeatherDetails,
+    clearContent,
+    todaySection,
+    tomorrowSection,
+    sixDaysSection,
   };
 })();
 
