@@ -2,7 +2,6 @@
 
 const weatherInformation = (function () {
   const _apiKey = '7f1fbcd5b4f7fd4e0d1795060fcd8a3c';
-  let locationInfo;
 
   /**
    * Fetch lat and lon based on cityName
@@ -51,20 +50,25 @@ const weatherInformation = (function () {
 
   async function requestData(cityName) {
     try {
-      locationInfo = await getLocation(cityName);
-      console.log(locationInfo);
-
+      let locationInfo = await getLocation(cityName);
       return fetchData(locationInfo.latLon);
     } catch (error) {
       console.log(error);
     }
   }
 
+  const destructureObject = function (object, properties) {
+    let information = Object.fromEntries(
+      [...properties].map((key) => [key, Math.round(object[key])])
+    );
+    return information;
+  };
+
   return {
     fetchData,
     requestData,
     getLocation,
-    locationInfo,
+    destructureObject,
   };
 })();
 
