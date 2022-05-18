@@ -13,33 +13,6 @@ const View = (function () {
     _todayDetails.textContent = '';
   };
 
-  /**
-   * Converts time stamp to locale's format date.
-   * @param {number} timestamp Time stamp.
-   * @param {boolean} gethour If true function returns the hour.
-   * @returns {string} Formated date.
-   */
-  const _convertDateToLocale = function (timestamp, getHour) {
-    const convertDate = new Date(timestamp * 1000);
-    const options = {
-      weekday: 'long',
-      month: 'long',
-      day: 'numeric',
-    };
-    if (getHour) {
-      // let fullDate = new Date(1000 * dt);
-      let hours = `${convertDate.getHours()}`;
-      let minutes = `0${convertDate.getMinutes()}`;
-      let amPm = hours >= 12 ? 'pm' : 'am';
-      return `${
-        hours < 10
-          ? `0${hours}:${minutes} ${amPm}`
-          : `${hours}:${minutes} ${amPm}`
-      }`;
-    }
-    return convertDate.toLocaleDateString(navigator.language, options);
-  };
-
   const _createDetailContainer = function (property, value) {
     const detailContainer = document.createElement('div');
     const propertyEl = document.createElement('p');
@@ -68,8 +41,12 @@ const View = (function () {
     locationInfo.classList.add('location-info');
     cityCountryLocation.id = 'city-country-location';
     dateElement.id = 'date';
-    cityCountryLocation.textContent = `${cityName}, ${countryName}`;
-    dateElement.textContent = `${_convertDateToLocale(timestamp)}`;
+    cityCountryLocation.textContent = `${cityName}, ${weatherInformation.regionNames(
+      countryName
+    )}`;
+    dateElement.textContent = `${weatherInformation.convertDateToLocale(
+      timestamp
+    )}`;
     return locationInfo;
   };
 
@@ -151,7 +128,10 @@ const View = (function () {
       );
       card.append(detailHours, iconContainer);
 
-      hourEl.textContent = `${_convertDateToLocale(hourlyObject[i].dt, true)}`;
+      hourEl.textContent = `${weatherInformation.convertDateToLocale(
+        hourlyObject[i].dt,
+        true
+      )}`;
       iconDescription.textContent = hourlyObject[i].weather[0].description;
       smallIcon.src = `http://openweathermap.org/img/wn/${hourlyObject[i].weather[0].icon}@2x.png`;
       smallIcon.alt = 'Weather icon.';
