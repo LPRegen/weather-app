@@ -36,7 +36,6 @@ sectionContainer.addEventListener('click', async function (e) {
           locationInfo.cityName,
           locationInfo.country
         );
-        console.log(weatherInfo, locationInfo);
         break;
       case 'tomorrow-section':
         View.tomorrowSection();
@@ -53,5 +52,5 @@ searchForm.addEventListener('submit', (e) => {
 });
 
 searchIcon.addEventListener('click', (e) => {
-  searchLocation(e);
+  if (searchForm.value) searchLocation(e);
 });
