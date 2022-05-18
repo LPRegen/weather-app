@@ -1,3 +1,197 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5;
+  font-family: "Roboto Flex", sans-serif;
+  background-color: #f1bd8e;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+#root,
+#__next {
+  isolation: isolate;
+}
+
+.search-container {
+  margin: 0.5rem;
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+.search-container .search-input {
+  width: 80%;
+  padding: 0.3rem 0.2rem;
+}
+.search-container .search-btn {
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.sections {
+  display: flex;
+  margin: 1rem 0.5rem 2rem 0.5rem;
+  justify-content: space-around;
+  align-content: space-between;
+}
+.sections .active-section {
+  text-decoration: underline;
+}
+.sections .section-name {
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.general-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.top-container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  margin: 1rem;
+}
+.top-container .location-info {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.weather-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.weather-details .weather-description {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.current-feels-temp {
+  display: grid;
+  grid-template-columns: repeat(2, 0.5fr);
+  grid-template-rows: 2fr 0.5fr;
+  justify-items: center;
+  align-items: baseline;
+  margin: 0 3rem;
+  margin-bottom: 2rem;
+}
+.current-feels-temp .current-temp {
+  display: grid;
+  grid-column: 1/2;
+  font-size: 3rem;
+}
+.current-feels-temp .feels-temp {
+  display: grid;
+  grid-column: 2/3;
+  font-size: 2rem;
+}
+.current-feels-temp .small {
+  display: grid;
+  grid-row: 2/3;
+}
+
+.daily-details {
+  margin: 0 1.5rem;
+}
+.daily-details .cards {
+  margin-bottom: 2rem;
+}
+.daily-details .today-details {
+  margin-bottom: 2rem;
+}
+.daily-details .title-details {
+  margin-bottom: 1rem;
+}
+.daily-details .hourly-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  margin: 0 2rem;
+  margin-bottom: 1rem;
+  height: 2rem;
+  background-color: #f29f51;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+.daily-details .hourly-details .hour {
+  padding-left: 1rem;
+}
+.daily-details .hourly-details .hourly-min-max {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding-right: 1rem;
+}
+.daily-details .hourly-details .hourly-min-max .max-temp-hour {
+  font-size: 1.2rem;
+}
+.daily-details .more-information {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 1rem;
+}
+
+footer a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0.5rem 0;
+  background-color: rgba(113, 108, 108, 0.645);
+  text-decoration: none;
+}
+footer a .github-icon {
+  width: 32px;
+  height: 32px;
+}
+footer a:visited {
+  color: white;
+}
 
 /*# sourceMappingURL=style.css.map */
