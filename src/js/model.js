@@ -5,6 +5,45 @@ const weatherInformation = (function () {
 
   /**
    * Fetch lat and lon based on cityName
+   * @param  {string} regionName Name of the region
+   * @return  {string} Country name translated to locale language.
+   */
+  const regionNames = function (regionName) {
+    const translated = new Intl.DisplayNames([navigator.language], {
+      type: 'region',
+    });
+    return translated.of(regionName);
+  };
+
+  /**
+   * Converts time stamp to locale's format date.
+   * @param {number} timestamp Time stamp.
+   * @param {boolean} gethour If true, returns the hour.
+   * @returns {string} Formated date.
+   */
+  const convertDateToLocale = function (timestamp, getHour) {
+    const convertDate = new Date(timestamp * 1000);
+    const options = {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+    };
+    if (getHour) {
+      // let fullDate = new Date(1000 * dt);
+      let hours = `${convertDate.getHours()}`;
+      let minutes = `0${convertDate.getMinutes()}`;
+      let amPm = hours >= 12 ? 'pm' : 'am';
+      return `${
+        hours < 10
+          ? `0${hours}:${minutes} ${amPm}`
+          : `${hours}:${minutes} ${amPm}`
+      }`;
+    }
+    return convertDate.toLocaleDateString(navigator.language, options);
+  };
+
+  /**
+   * Fetch lat and lon based on cityName
    * @param  {string} cityName Name of the city
    * @return  {array} Array with coordinates.
    */
@@ -65,6 +104,8 @@ const weatherInformation = (function () {
   };
 
   return {
+    regionNames,
+    convertDateToLocale,
     fetchData,
     requestData,
     getLocation,
