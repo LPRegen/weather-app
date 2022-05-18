@@ -15,17 +15,42 @@ const View = (function () {
 
   /**
    * Converts time stamp to locale's format date.
-   * @param {number} date Time stamp.
-   * @returns {string} Formated date..
+   * @param {number} timestamp Time stamp.
+   * @param {boolean} gethour If true function returns the hour.
+   * @returns {string} Formated date.
    */
-  const _convertDateToLocale = function (date) {
-    const convertDate = new Date(1652837786 * 1000);
+  const _convertDateToLocale = function (timestamp, getHour) {
+    const convertDate = new Date(timestamp * 1000);
     const options = {
       weekday: 'long',
       month: 'long',
       day: 'numeric',
     };
+    if (getHour) {
+      // let fullDate = new Date(1000 * dt);
+      let hours = `${convertDate.getHours()}`;
+      let minutes = `0${convertDate.getMinutes()}`;
+      let amPm = hours >= 12 ? 'pm' : 'am';
+      return `${
+        hours < 10
+          ? `0${hours}:${minutes} ${amPm}`
+          : `${hours}:${minutes} ${amPm}`
+      }`;
+    }
     return convertDate.toLocaleDateString(navigator.language, options);
+  };
+
+  const _createDetailContainer = function (property, value) {
+    const detailContainer = document.createElement('div');
+    const propertyEl = document.createElement('p');
+    const valueEl = document.createElement('p');
+    detailContainer.append(propertyEl, valueEl);
+
+    detailContainer.classList.add('detail-container');
+    propertyEl.textContent = property;
+    valueEl.textContent = value + ' °C';
+
+    return detailContainer;
   };
 
   /**
@@ -99,34 +124,38 @@ const View = (function () {
     title.textContent = 'Hourly details';
     let cardElements = [];
 
-    const convertDT = function (dt) {
-      let fullDate = new Date(1000 * dt);
-      let hours = `${fullDate.getHours()}`;
-      let minutes = `0${fullDate.getMinutes()}`;
-      let amPm = hours >= 12 ? 'pm' : 'am';
-      return `${
-        hours < 10
-          ? `0${hours}:${minutes} ${amPm}`
-          : `${hours}:${minutes} ${amPm}`
-      }`;
-    };
-
     for (let i = fromHour; i < toHour; i++) {
       const card = document.createElement('div');
-      const tempContainer = document.createElement('div');
-      const hourEl = document.createElement('p');
-      const tempEl = document.createElement('p');
-      const feelsLikeEl = document.createElement('p');
-      tempContainer.append(tempEl, feelsLikeEl);
-      card.append(hourEl, tempContainer);
-      hourEl.textContent = `${convertDT(hourlyObject[i].dt)}`;
-      tempEl.textContent = `${Math.round(hourlyObject[i].temp)} °C`;
-      feelsLikeEl.textContent = `${Math.round(hourlyObject[i].feels_like)} °C`;
-      card.classList.add('hourly-details');
+      const detailHours = document.createElement('div');
+      const hourEl = document.createElement('h4');
+      const iconContainer = document.createElement('div');
+      const smallIcon = document.createElement('img');
+      const iconDescription = document.createElement('p');
+
+      card.classList.add('card-hourly');
+      detailHours.classList.add('detail-hours');
       hourEl.classList.add('hour');
-      tempContainer.classList.add('hourly-min-max');
-      tempEl.classList.add('max-temp-hour');
-      feelsLikeEl.classList.add('min-temp-hour');
+      iconContainer.classList.add('weather-icon');
+      smallIcon.classList.add('hourly-icon');
+      iconDescription.classList.add('icon-description');
+
+      iconContainer.append(smallIcon, iconDescription);
+      detailHours.append(
+        hourEl,
+        _createDetailContainer('Temperature', Math.round(hourlyObject[i].temp)),
+        _createDetailContainer(
+          'Feels like',
+          Math.round(hourlyObject[i].feels_like),
+          iconContainer
+        )
+      );
+      card.append(detailHours, iconContainer);
+
+      hourEl.textContent = `${_convertDateToLocale(hourlyObject[i].dt, true)}`;
+      iconDescription.textContent = hourlyObject[i].weather[0].description;
+      smallIcon.src = `http://openweathermap.org/img/wn/${hourlyObject[i].weather[0].icon}@2x.png`;
+      smallIcon.alt = 'Weather icon.';
+
       cardElements.push(card);
     }
 
