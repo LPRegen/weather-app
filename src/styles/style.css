@@ -148,28 +148,38 @@ h6 {
 .daily-details .title-details {
   margin-bottom: 1rem;
 }
-.daily-details .hourly-details {
+.daily-details .card-hourly {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-evenly;
   border-radius: 10px;
-  margin: 0 2rem;
+  padding: 1rem 0;
   margin-bottom: 1rem;
-  height: 2rem;
   background-color: #f29f51;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
-.daily-details .hourly-details .hour {
-  padding-left: 1rem;
+.daily-details .card-hourly .details-hour p {
+  font-size: 0.9rem;
 }
-.daily-details .hourly-details .hourly-min-max {
+.daily-details .card-hourly .detail-container {
   display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-  padding-right: 1rem;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
 }
-.daily-details .hourly-details .hourly-min-max .max-temp-hour {
-  font-size: 1.2rem;
+.daily-details .card-hourly .weather-icon {
+  display: grid;
+  justify-items: center;
+  align-content: flex-end;
+}
+.daily-details .card-hourly .weather-icon .hourly-icon {
+  width: 70px;
+  height: 70px;
+}
+.daily-details .card-hourly .weather-icon .icon-description {
+  font-size: 0.9rem;
+}
+.daily-details .card-hourly .weather-icon .icon-description::first-letter {
+  text-transform: capitalize;
 }
 .daily-details .more-information {
   display: flex;
