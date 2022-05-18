@@ -1,4 +1,5 @@
 import { weatherInformation } from './model';
+import { TomorrowSection } from './pages/tomorrow';
 
 const View = (function () {
   const _topContainer = document.querySelector('.top-container');
@@ -14,18 +15,32 @@ const View = (function () {
   };
 
   /**
-   * Updates displayed location and date.
-   * @param {string} cityName City's name.
-   * @param {string} countryName Country's name.
-   * @returns {htmlElement} HTML element.
+   * Converts time stamp to locale's format date.
+   * @param {number} date Time stamp.
+   * @returns {string} Formated date..
    */
-  const _createLocationContainer = function (cityName, countryName) {
-    let date = new Date();
+  const _convertDateToLocale = function (date) {
+    const convertDate = new Date(1652837786 * 1000);
     const options = {
       weekday: 'long',
       month: 'long',
       day: 'numeric',
     };
+    return convertDate.toLocaleDateString(navigator.language, options);
+  };
+
+  /**
+   * Updates displayed location and date.
+   * @param {object} weatherObj Object with retrieved information from API call.
+   * @param {string} cityName City's name.
+   * @param {string} countryName Country's name.
+   * @returns {htmlElement} HTML element.
+   */
+  const _createLocationContainer = function (
+    weatherObj,
+    cityName,
+    countryName
+  ) {
     const locationInfo = document.createElement('div');
     const cityCountryLocation = document.createElement('p');
     const dateElement = document.createElement('p');
@@ -34,10 +49,7 @@ const View = (function () {
     cityCountryLocation.id = 'city-country-location';
     dateElement.id = 'date';
     cityCountryLocation.textContent = `${cityName}, ${countryName}`;
-    dateElement.textContent = `${date.toLocaleDateString(
-      navigator.language,
-      options
-    )}`;
+    dateElement.textContent = `${_convertDateToLocale(weatherObj.current.dt)}`;
     return locationInfo;
   };
 
@@ -175,7 +187,7 @@ const View = (function () {
 
   function todaySection(weatherObj, cityName, countryName) {
     clearContent();
-    let location = _createLocationContainer(cityName, countryName);
+    let location = _createLocationContainer(weatherObj, cityName, countryName);
     let weatherDescription = _createWeatherDescription(weatherObj);
     let currentTemperature = _createCurrentTemp(
       weatherObj.current.temp,
