@@ -1,5 +1,4 @@
 import { weatherInformation } from './model';
-import { TomorrowSection } from './pages/tomorrow';
 
 const View = (function () {
   const _topContainer = document.querySelector('.top-container');
@@ -31,16 +30,12 @@ const View = (function () {
 
   /**
    * Updates displayed location and date.
-   * @param {object} weatherObj Object with retrieved information from API call.
+   * @param {Object} weatherObj Object with retrieved information from API call.
    * @param {string} cityName City's name.
    * @param {string} countryName Country's name.
    * @returns {htmlElement} HTML element.
    */
-  const _createLocationContainer = function (
-    weatherObj,
-    cityName,
-    countryName
-  ) {
+  const _createLocationContainer = function (timestamp, cityName, countryName) {
     const locationInfo = document.createElement('div');
     const cityCountryLocation = document.createElement('p');
     const dateElement = document.createElement('p');
@@ -49,7 +44,7 @@ const View = (function () {
     cityCountryLocation.id = 'city-country-location';
     dateElement.id = 'date';
     cityCountryLocation.textContent = `${cityName}, ${countryName}`;
-    dateElement.textContent = `${_convertDateToLocale(weatherObj.current.dt)}`;
+    dateElement.textContent = `${_convertDateToLocale(timestamp)}`;
     return locationInfo;
   };
 
@@ -86,19 +81,19 @@ const View = (function () {
     smallFeels.classList.add('small');
     currentTemp.textContent = `${roundedTemp[0]} °C`;
     feelsLikeTemp.textContent = `${roundedTemp[1]} °C`;
-    smallCurrent.textContent = 'Current temperature';
-    smallFeels.textContent = 'Feels like';
+    smallCurrent.textContent = 'Max temperature';
+    smallFeels.textContent = 'Min temperature';
     return [currentTemp, feelsLikeTemp, smallCurrent, smallFeels];
   };
 
   /**
    * Creates card with information by hours.
-   * @param {Number} hour Hour.
-   * @param {number} maxTemp Max temperature.
-   * @param {number} minTemp Min temperature.
-   * @return HTML element.
+   * @param {Object} hourlyObject Hourly object retrieved from API call.
+   * @param {number} fromHour Starting hour, default 1.
+   * @param {number} toHour Ending hour, default 9.
+   * @return HTML element with information about weather in the next 8 hours(default).
    */
-  const _createHourCard = function (hourlyObject) {
+  const _createHourCard = function (hourlyObject, fromHour = 1, toHour = 9) {
     const title = document.createElement('h3');
     title.classList.add('title-details');
     title.textContent = 'Hourly details';
@@ -116,7 +111,7 @@ const View = (function () {
       }`;
     };
 
-    for (let i = 1; i < 8; i++) {
+    for (let i = fromHour; i < toHour; i++) {
       const card = document.createElement('div');
       const tempContainer = document.createElement('div');
       const hourEl = document.createElement('p');
@@ -187,22 +182,35 @@ const View = (function () {
 
   function todaySection(weatherObj, cityName, countryName) {
     clearContent();
-    let location = _createLocationContainer(weatherObj, cityName, countryName);
+    let location = _createLocationContainer(
+      weatherObj.current.dt,
+      cityName,
+      countryName
+    );
     let weatherDescription = _createWeatherDescription(weatherObj);
     let currentTemperature = _createCurrentTemp(
-      weatherObj.current.temp,
-      weatherObj.current.feels_like
+      weatherObj.daily[0].temp.max,
+      weatherObj.daily[0].temp.min
     );
     let hourlyCards = _createHourCard(weatherObj.hourly);
     let moreInformation = _updateMoreInformation(weatherObj.current);
+
     _topContainer.append(location, weatherDescription);
     currentTemperature.forEach((html) => _currentTemp.append(html));
     hourlyCards.forEach((html) => _hourlyCards.append(html));
     moreInformation.forEach((html) => _todayDetails.append(html));
   }
 
-  function tomorrowSection() {
-    // clearContent();
+  function tomorrowSection(weatherObj, cityName, countryName) {
+    clearContent();
+    let location = _createLocationContainer(
+      weatherObj.daily[0].dt,
+      cityName,
+      countryName
+    );
+    let weatherDescription = _createWeatherDescription(weatherObj);
+
+    _topContainer.append(location, weatherDescription);
   }
 
   function sixDaysSection() {
@@ -210,7 +218,6 @@ const View = (function () {
   }
 
   return {
-    clearContent,
     todaySection,
     tomorrowSection,
     sixDaysSection,
