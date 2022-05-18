@@ -4,12 +4,13 @@ const View = (function () {
   const _topContainer = document.querySelector('.top-container');
   const _currentTemp = document.querySelector('.current-feels-temp');
   const _hourlyCards = document.querySelector('.cards');
-  const _dailyDetailsContainer = document.querySelector('.daily-details');
+  const _todayDetails = document.querySelector('.today-details');
 
   const clearContent = function () {
     _topContainer.textContent = '';
     _currentTemp.textContent = '';
-    // _dailyDetailsContainer.textContent = '';
+    _hourlyCards.textContent = '';
+    _todayDetails.textContent = '';
   };
 
   /**
@@ -126,6 +127,52 @@ const View = (function () {
     return cardElements;
   };
 
+  const _updateMoreInformation = function (weatherObj) {
+    let elements = [];
+    const information = weatherInformation.destructureObject(weatherObj, [
+      'feels_like',
+      'humidity',
+      'uvi',
+      'wind_speed',
+    ]);
+
+    const title = document.createElement('h3');
+    title.classList.add('title-details');
+    title.textContent = 'More information';
+    elements.push(title);
+
+    for (const property in information) {
+      const container = document.createElement('div');
+      const description = document.createElement('p');
+      const value = document.createElement('p');
+      container.append(description, value);
+      container.classList.add('more-information');
+
+      switch (property) {
+        case 'feels_like':
+          description.textContent = 'Feels like';
+          value.textContent = `${information[property]} °C`;
+          break;
+        case 'humidity':
+          description.textContent = 'Humidity';
+          value.textContent = `${information[property]} %`;
+          break;
+        case 'uvi':
+          description.textContent = 'UV index';
+          value.textContent = `${information[property]}`;
+          break;
+        case 'wind_speed':
+          description.textContent = 'Wind speed';
+          value.textContent = `${information[property]} km/h`;
+        default:
+          break;
+      }
+
+      elements.push(container);
+    }
+    return elements;
+  };
+
   function todaySection(weatherObj, cityName, countryName) {
     clearContent();
     let location = _createLocationContainer(cityName, countryName);
@@ -135,9 +182,11 @@ const View = (function () {
       weatherObj.current.feels_like
     );
     let hourlyCards = _createHourCard(weatherObj.hourly);
+    let moreInformation = _updateMoreInformation(weatherObj.current);
     _topContainer.append(location, weatherDescription);
     currentTemperature.forEach((html) => _currentTemp.append(html));
     hourlyCards.forEach((html) => _hourlyCards.append(html));
+    moreInformation.forEach((html) => _todayDetails.append(html));
   }
 
   function tomorrowSection() {
