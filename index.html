@@ -5,9 +5,68 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../src/styles/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+
     <title>Weather App</title>
   </head>
   <body>
+    <header>
+      <form action="" class="search-container">
+        <input
+          type="text"
+          name="location"
+          class="search-input"
+          id="location-search"
+          placeholder="Enter a city name"
+          value="Villa los Altos"
+          required
+        />
+        <div class="search-btn" id="search-icon">
+          <span class="material-symbols-outlined"> search </span>
+        </div>
+      </form>
+      <div class="sections">
+        <h4 class="section-name active-section" id="today-section">Today</h4>
+        <h4 class="section-name" id="tomorrow-section">Tomorrow</h4>
+        <h4 class="section-name" id="six-days-section">6 Days</h4>
+      </div>
+    </header>
+    <div class="general-container">
+      <div class="top-container"></div>
+      <div class="current-feels-temp"></div>
+      <div class="daily-details">
+        <div class="cards"></div>
+        <div class="today-details"></div>
+      </div>
+    </div>
+    <footer>
+      <a
+        href="https://github.com/LPRegen"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="link-profile"
+      >
+        <img
+          src="../src/assets/icons/github-64.svg"
+          alt=""
+          class="github-icon"
+        />
+        <p>| LPRegen</p>
+      </a>
+    </footer>
     <script src="./main.js"></script>
   </body>
 </html>
