@@ -75,16 +75,16 @@ const View = (function () {
       'p',
       'icon-description',
       'weather-description',
-      weatherObject.current.weather[0].description
+      weatherObject.weather[0].description
     );
     const weatherIcon = _createElement('img', 'weather-icon', 'weather-icon');
     container.append(weatherIcon, description);
     weatherIcon.alt = 'Weather icon.';
-    weatherIcon.src = `http://openweathermap.org/img/wn/${weatherObject.current.weather[0].icon}@2x.png`;
+    weatherIcon.src = `http://openweathermap.org/img/wn/${weatherObject.weather[0].icon}@2x.png`;
     return container;
   };
 
-  const _createCurrentTemp = function (currTemp, feelsTemp) {
+  const _createCurrentTemp = function (currTemp, feelsTemp, todayTemp) {
     const roundedTemp = [Math.round(currTemp), Math.round(feelsTemp)];
     const currentTemp = _createElement(
       'h1',
@@ -102,9 +102,14 @@ const View = (function () {
       'small',
       'small',
       '',
-      'Current temperature'
+      `${todayTemp ? 'Current temperature' : 'Max temperature'}`
     );
-    const smallFeels = _createElement('small', 'small', '', 'Feels like');
+    const smallFeels = _createElement(
+      'small',
+      'small',
+      '',
+      `${todayTemp ? 'Feels like' : 'Min temperature'}`
+    );
     return [currentTemp, feelsLikeTemp, smallCurrent, smallFeels];
   };
 
@@ -160,9 +165,7 @@ const View = (function () {
 
   const _updateMoreInformation = function (weatherObj) {
     let elements = [];
-    const container = _createElement('div', 'today-details');
     const information = weatherInformation.destructureObject(weatherObj, [
-      'feels_like',
       'humidity',
       'uvi',
       'wind_speed',
@@ -175,10 +178,6 @@ const View = (function () {
       container.append(description, value);
 
       switch (property) {
-        case 'feels_like':
-          description.textContent = 'Feels like';
-          value.textContent = `${information[property]} °C`;
-          break;
         case 'humidity':
           description.textContent = 'Humidity';
           value.textContent = `${information[property]} %`;
@@ -195,8 +194,7 @@ const View = (function () {
 
       elements.push(container);
     }
-    elements.forEach((element) => container.append(element));
-    return container;
+    return elements;
   };
 
   function todaySection(weatherObj, cityName, countryName) {
@@ -206,30 +204,38 @@ const View = (function () {
       cityName,
       countryName
     );
-    let weatherDescription = _createWeatherDescription(weatherObj);
+    let weatherDescription = _createWeatherDescription(weatherObj.current);
     let currentTemperature = _createCurrentTemp(
       weatherObj.current.temp,
-      weatherObj.current.feels_like
+      weatherObj.current.feels_like,
+      true
     );
     let moreInformation = _updateMoreInformation(weatherObj.current);
     let hourlyCards = _createHourCard(weatherObj.hourly);
 
     _topContainer.append(location, weatherDescription);
     currentTemperature.forEach((html) => _currentTemp.append(html));
-    _currentFeelsTemp.insertAdjacentElement('afterend', moreInformation);
+    moreInformation.forEach((html) => _todayDetails.append(html));
     hourlyCards.forEach((html) => _hourlyCards.append(html));
   }
 
   function tomorrowSection(weatherObj, cityName, countryName) {
     clearContent();
     let location = _createLocationContainer(
-      weatherObj.daily[0].dt,
+      weatherObj.daily[1].dt,
       cityName,
       countryName
     );
-    let weatherDescription = _createWeatherDescription(weatherObj);
+    let weatherDescription = _createWeatherDescription(weatherObj.daily[1]);
+    let moreInformation = _updateMoreInformation(weatherObj.daily[1]);
+    let currentTemperature = _createCurrentTemp(
+      weatherObj.current.temp,
+      weatherObj.current.feels_like
+    );
 
     _topContainer.append(location, weatherDescription);
+    moreInformation.forEach((html) => _todayDetails.append(html));
+    currentTemperature.forEach((html) => _currentTemp.append(html));
   }
 
   function sixDaysSection() {
