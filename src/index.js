@@ -38,7 +38,11 @@ sectionContainer.addEventListener('click', async function (e) {
         );
         break;
       case 'tomorrow-section':
-        View.tomorrowSection();
+        View.tomorrowSection(
+          weatherInfo,
+          locationInfo.cityName,
+          locationInfo.country
+        );
         break;
       case 'six-days-section':
         View.sixDaysSection();
