@@ -15,6 +15,16 @@ const View = (function () {
     _todayDetails.textContent = '';
   };
 
+  /**
+   * Updates displayed location and date.
+   * @param {string} string String to modify
+   * @returns {string} String without space and underscore.
+   */
+  const _modifyString = function (string) {
+    let modified = string.replace('_', ' ');
+    return modified.charAt(0).toUpperCase() + modified.slice(1);
+  };
+
   const _createElement = function (element, className, id, textContent) {
     const newElement = document.createElement(element);
     if (className) newElement.classList.add(className);
@@ -163,20 +173,18 @@ const View = (function () {
     return cardElements;
   };
 
-  const _updateMoreInformation = function (weatherObj) {
+  const _updateMoreInformation = function (weatherObj, options) {
     let elements = [];
     const information = weatherInformation.destructureObject(weatherObj, [
-      'humidity',
-      'uvi',
-      'wind_speed',
+      ...options,
     ]);
 
     for (const property in information) {
       const container = _createElement('div', 'more-information');
-      const description = document.createElement('p');
-      const value = document.createElement('p');
+      const description = _createElement('p');
+      const value = _createElement('p');
       container.append(description, value);
-
+      description.textContent = _modifyString(property);
       switch (property) {
         case 'humidity':
           description.textContent = 'Humidity';
@@ -210,7 +218,11 @@ const View = (function () {
       weatherObj.current.feels_like,
       true
     );
-    let moreInformation = _updateMoreInformation(weatherObj.current);
+    let moreInformation = _updateMoreInformation(weatherObj.current, [
+      'humidity',
+      'uvi',
+      'wind_speed',
+    ]);
     let hourlyCards = _createHourCard(weatherObj.hourly);
 
     _topContainer.append(location, weatherDescription);
@@ -227,15 +239,21 @@ const View = (function () {
       countryName
     );
     let weatherDescription = _createWeatherDescription(weatherObj.daily[1]);
-    let moreInformation = _updateMoreInformation(weatherObj.daily[1]);
+    let moreInformation = _updateMoreInformation(weatherObj.daily[1], [
+      'humidity',
+      'uvi',
+      'wind_speed',
+    ]);
     let currentTemperature = _createCurrentTemp(
       weatherObj.current.temp,
       weatherObj.current.feels_like
     );
+    let hourlyCards = _createHourCard(weatherObj.hourly, 25, 47);
 
     _topContainer.append(location, weatherDescription);
     moreInformation.forEach((html) => _todayDetails.append(html));
     currentTemperature.forEach((html) => _currentTemp.append(html));
+    hourlyCards.forEach((html) => _hourlyCards.append(html));
   }
 
   function sixDaysSection() {
