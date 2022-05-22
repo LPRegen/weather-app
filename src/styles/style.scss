@@ -109,7 +109,6 @@ h6 {
     flex-direction: column;
     justify-content: center;
     align-content: center;
-    // gap: 0.2rem;
 
     #date {
       font-size: 0.8rem;
@@ -216,6 +215,69 @@ h6 {
       p {
         font-size: 0.8rem;
       }
+    }
+  }
+}
+
+.six-days-card {
+  display: flex;
+  flex-direction: column;
+  filter: drop-shadow(0px 4px 4px $card-shadow);
+  margin: 0 1rem;
+
+  .upper-container {
+    display: flex;
+    background-color: rgb(145, 145, 235);
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 10px;
+    padding: 0 1rem;
+    z-index: 99;
+    filter: drop-shadow(0px 4px 4px $card-shadow);
+
+    .temperature {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .card-date {
+      font-size: 0.8rem;
+      width: fit-content;
+    }
+
+    .max-temp {
+      font-size: 1.2rem;
+    }
+
+    .min-temp {
+      font-size: 0.8rem;
+    }
+
+    .six-days-icon {
+      height: 48px;
+      width: 48px;
+    }
+
+    span {
+      cursor: pointer;
+    }
+  }
+
+  .six-days-info {
+    display: flex;
+    flex-direction: column;
+    background-color: $card-background;
+    border-radius: 10px;
+    position: relative;
+    top: -0.7rem;
+    margin: 0 1rem 0 1rem;
+    padding: 1rem 0.5rem 0.5rem 0.5rem;
+
+    .more-information {
+      display: flex;
+      justify-content: space-between;
     }
   }
 }

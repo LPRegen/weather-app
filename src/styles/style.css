@@ -195,6 +195,60 @@ h6 {
   font-size: 0.8rem;
 }
 
+.six-days-card {
+  display: flex;
+  flex-direction: column;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  margin: 0 1rem;
+}
+.six-days-card .upper-container {
+  display: flex;
+  background-color: rgb(145, 145, 235);
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 10px;
+  padding: 0 1rem;
+  z-index: 99;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+.six-days-card .upper-container .temperature {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.six-days-card .upper-container .card-date {
+  font-size: 0.8rem;
+  width: fit-content;
+}
+.six-days-card .upper-container .max-temp {
+  font-size: 1.2rem;
+}
+.six-days-card .upper-container .min-temp {
+  font-size: 0.8rem;
+}
+.six-days-card .upper-container .six-days-icon {
+  height: 48px;
+  width: 48px;
+}
+.six-days-card .upper-container span {
+  cursor: pointer;
+}
+.six-days-card .six-days-info {
+  display: flex;
+  flex-direction: column;
+  background-color: #f29f51;
+  border-radius: 10px;
+  position: relative;
+  top: -0.7rem;
+  margin: 0 1rem 0 1rem;
+  padding: 1rem 0.5rem 0.5rem 0.5rem;
+}
+.six-days-card .six-days-info .more-information {
+  display: flex;
+  justify-content: space-between;
+}
+
 footer a {
   display: flex;
   justify-content: center;
