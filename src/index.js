@@ -6,6 +6,7 @@ const searchInput = document.querySelector('#location-search');
 const searchForm = document.querySelector('.search-container');
 const searchIcon = document.querySelector('#search-icon');
 const sectionContainer = document.querySelector('.sections');
+const todaySection = document.querySelector('#today-section');
 let locationInfo;
 let weatherInfo;
 
@@ -17,6 +18,7 @@ let weatherInfo;
 
 async function searchLocation(e) {
   e.preventDefault();
+  View.toggleActiveSection(todaySection);
   locationInfo = await weatherInformation.getLocation(searchInput.value);
   weatherInfo = await weatherInformation.fetchData(locationInfo.latLon);
   console.log(weatherInfo);
