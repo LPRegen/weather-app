@@ -1,18 +1,10 @@
 import { weatherInformation } from './model';
 
 const View = (function () {
-  const _topContainer = document.querySelector('.top-container');
-  const _currentTemp = document.querySelector('.current-feels-temp');
-  const _hourlyCards = document.querySelector('.cards');
-  const _currentFeelsTemp = document.querySelector('.current-feels-temp');
-  const _todayDetails = document.querySelector('.today-details');
+  const _generalContainer = document.querySelector('.general-container');
 
   const clearContent = function () {
-    _topContainer.textContent = '';
-    _currentTemp.textContent = '';
-    _hourlyCards.textContent = '';
-    _currentFeelsTemp.textContent = '';
-    _todayDetails.textContent = '';
+    _generalContainer.textContent = '';
   };
 
   /**
@@ -31,6 +23,25 @@ const View = (function () {
     if (id) newElement.id = id;
     if (textContent) newElement.textContent = textContent;
     return newElement;
+  };
+
+  const _createContainers = function (sixDays) {
+    const _topContainer = _createElement('div', 'top-container');
+    const _currentFeelsTemp = _createElement('div', 'current-feels-temp');
+    const _todayDetails = _createElement('div', 'today-details');
+    const _dailyDetails = _createElement('div', 'daily-details');
+    const _cards = _createElement('div', 'cards');
+    if (sixDays) {
+      _generalContainer.append(_cards);
+    } else {
+      _dailyDetails.append(_cards);
+      _generalContainer.append(
+        _topContainer,
+        _currentFeelsTemp,
+        _todayDetails,
+        _dailyDetails
+      );
+    }
   };
 
   const _createDetailContainer = function (property, value) {
@@ -168,7 +179,7 @@ const View = (function () {
       smallIcon.alt = 'Weather icon.';
       cardElements.push(card);
     }
-    _hourlyCards.insertAdjacentElement('afterbegin', title);
+    document.querySelector('.cards').insertAdjacentElement('afterbegin', title);
 
     return cardElements;
   };
@@ -205,8 +216,60 @@ const View = (function () {
     return elements;
   };
 
+  const _createSixDaysCard = function (weatherObj) {
+    let containerElements = [];
+
+    for (let i = 1; i < weatherObj.length; i++) {
+      const container = _createElement('div', 'six-days-card');
+      const upperContainer = _createElement('div', 'upper-container');
+      const tempContainer = _createElement('div', 'temperature');
+      const maxTemp = _createElement(
+        'p',
+        'max-temp',
+        '',
+        `${Math.round(weatherObj[i].temp.max)} °C`
+      );
+      const minTemp = _createElement(
+        'p',
+        'min-temp',
+        '',
+        `${Math.round(weatherObj[i].temp.min)} °C`
+      );
+      const cardDate = _createElement(
+        'p',
+        'card-date',
+        '',
+        `${weatherInformation.convertDateToLocale(weatherObj[i].dt)}`
+      );
+      const weatherIcon = _createElement('img', 'six-days-icon');
+      weatherIcon.alt = `${weatherObj[i].weather[0].description}`;
+      weatherIcon.src = `http://openweathermap.org/img/wn/${weatherObj[i].weather[0].icon}@2x.png`;
+      const spanMoreInfo = _createElement(
+        'span',
+        'material-symbols-outlined',
+        '',
+        'expand_circle_down'
+      );
+      spanMoreInfo.title = 'Click for more information';
+
+      const infoContainer = _createElement('div', 'six-days-info');
+      let moreInformation = _updateMoreInformation(weatherObj[i], [
+        'humidity',
+        'uvi',
+        'wind_speed',
+      ]);
+      container.append(upperContainer, infoContainer);
+      upperContainer.append(tempContainer, cardDate, weatherIcon, spanMoreInfo);
+      tempContainer.append(maxTemp, minTemp);
+      moreInformation.forEach((html) => infoContainer.append(html));
+      containerElements.push(container);
+    }
+    return containerElements;
+  };
+
   function todaySection(weatherObj, cityName, countryName) {
     clearContent();
+    _createContainers();
     let location = _createLocationContainer(
       weatherObj.current.dt,
       cityName,
@@ -225,14 +288,23 @@ const View = (function () {
     ]);
     let hourlyCards = _createHourCard(weatherObj.hourly);
 
-    _topContainer.append(location, weatherDescription);
-    currentTemperature.forEach((html) => _currentTemp.append(html));
-    moreInformation.forEach((html) => _todayDetails.append(html));
-    hourlyCards.forEach((html) => _hourlyCards.append(html));
+    document
+      .querySelector('.top-container')
+      .append(location, weatherDescription);
+    currentTemperature.forEach((html) =>
+      document.querySelector('.current-feels-temp').append(html)
+    );
+    moreInformation.forEach((html) =>
+      document.querySelector('.today-details').append(html)
+    );
+    hourlyCards.forEach((html) =>
+      document.querySelector('.cards').append(html)
+    );
   }
 
   function tomorrowSection(weatherObj, cityName, countryName) {
     clearContent();
+    _createContainers();
     let location = _createLocationContainer(
       weatherObj.daily[1].dt,
       cityName,
@@ -250,14 +322,26 @@ const View = (function () {
     );
     let hourlyCards = _createHourCard(weatherObj.hourly, 25, 47);
 
-    _topContainer.append(location, weatherDescription);
-    moreInformation.forEach((html) => _todayDetails.append(html));
-    currentTemperature.forEach((html) => _currentTemp.append(html));
-    hourlyCards.forEach((html) => _hourlyCards.append(html));
+    document
+      .querySelector('.top-container')
+      .append(location, weatherDescription);
+    moreInformation.forEach((html) =>
+      document.querySelector('.today-details').append(html)
+    );
+    currentTemperature.forEach((html) =>
+      document.querySelector('.current-feels-temp').append(html)
+    );
+    hourlyCards.forEach((html) =>
+      document.querySelector('.cards').append(html)
+    );
   }
 
-  function sixDaysSection() {
-    // clearContent();
+  function sixDaysSection(weatherObj) {
+    clearContent();
+    _createContainers(true);
+    _createSixDaysCard(weatherObj.daily).forEach((html) =>
+      document.querySelector('.cards').append(html)
+    );
   }
 
   return {
