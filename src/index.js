@@ -25,29 +25,25 @@ async function searchLocation(e) {
 }
 
 sectionContainer.addEventListener('click', async function (e) {
-  let activeSection = document.querySelector('.active-section');
-  if (e.target.classList.contains('section-name')) {
-    activeSection.classList.remove('active-section');
-    e.target.classList.add('active-section');
-    switch (e.target.id) {
-      case 'today-section':
-        await View.todaySection(
-          weatherInfo,
-          locationInfo.cityName,
-          locationInfo.country
-        );
-        break;
-      case 'tomorrow-section':
-        View.tomorrowSection(
-          weatherInfo,
-          locationInfo.cityName,
-          locationInfo.country
-        );
-        break;
-      case 'six-days-section':
-        View.sixDaysSection();
-        break;
-    }
+  View.toggleActiveSection(e.target);
+  switch (e.target.id) {
+    case 'today-section':
+      View.todaySection(
+        weatherInfo,
+        locationInfo.cityName,
+        locationInfo.country
+      );
+      break;
+    case 'tomorrow-section':
+      View.tomorrowSection(
+        weatherInfo,
+        locationInfo.cityName,
+        locationInfo.country
+      );
+      break;
+    case 'six-days-section':
+      View.sixDaysSection(weatherInfo);
+      break;
   }
 });
 
