@@ -44,6 +44,14 @@ const View = (function () {
     }
   };
 
+  const toggleActiveSection = function (element) {
+    let activeSection = document.querySelector('.active-section');
+    if (element.classList.contains('section-name')) {
+      activeSection.classList.remove('active-section');
+      element.classList.add('active-section');
+    }
+  };
+
   const _createDetailContainer = function (property, value) {
     const detailContainer = _createElement('div', 'detail-container');
     const propertyEl = _createElement('p', '', '', property);
@@ -345,6 +353,7 @@ const View = (function () {
   }
 
   return {
+    toggleActiveSection,
     todaySection,
     tomorrowSection,
     sixDaysSection,
