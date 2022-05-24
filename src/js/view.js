@@ -245,6 +245,13 @@ const View = (function () {
 
   const _createSixDaysCard = function (weatherObj) {
     let containerElements = [];
+    const sectionTitle = _createElement(
+      'h3',
+      'six-days-details',
+      '',
+      'Next six days'
+    );
+    containerElements.push(sectionTitle);
 
     for (let i = 1; i < weatherObj.length; i++) {
       const container = _createElement('div', 'six-days-card');

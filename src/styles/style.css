@@ -164,6 +164,10 @@ h6 {
 .cards .title-details {
   margin-bottom: 1rem;
 }
+.cards .six-days-details {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
 .cards .card-hourly {
   display: flex;
   justify-content: space-between;
