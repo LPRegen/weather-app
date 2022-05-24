@@ -7,6 +7,7 @@ const searchForm = document.querySelector('.search-container');
 const searchIcon = document.querySelector('#search-icon');
 const sectionContainer = document.querySelector('.sections');
 const todaySection = document.querySelector('#today-section');
+const generalContainer = document.querySelector('.general-container');
 let locationInfo;
 let weatherInfo;
 
@@ -55,4 +56,11 @@ searchForm.addEventListener('submit', (e) => {
 
 searchIcon.addEventListener('click', (e) => {
   if (searchForm.value) searchLocation(e);
+});
+
+generalContainer.addEventListener('click', (e) => {
+  e.stopPropagation();
+  if (e.target.classList.contains('display-more')) {
+    View.displayCardInfo(e);
+  }
 });

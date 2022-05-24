@@ -216,6 +216,7 @@ h6 {
   padding: 0 1rem;
   z-index: 99;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  margin-bottom: 1rem;
 }
 .six-days-card .upper-container .temperature {
   display: flex;
@@ -241,7 +242,7 @@ h6 {
   cursor: pointer;
 }
 .six-days-card .six-days-info {
-  display: flex;
+  display: none;
   flex-direction: column;
   background-color: #f29f51;
   border-radius: 10px;
@@ -253,6 +254,10 @@ h6 {
 .six-days-card .six-days-info .more-information {
   display: flex;
   justify-content: space-between;
+}
+.six-days-card .displayed-card {
+  display: flex;
+  margin-bottom: 0;
 }
 
 .load-container {

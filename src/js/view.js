@@ -285,6 +285,7 @@ const View = (function () {
         'expand_circle_down'
       );
       spanMoreInfo.title = 'Click for more information';
+      spanMoreInfo.classList.add('display-more');
 
       const infoContainer = _createElement('div', 'six-days-info');
       let moreInformation = _updateMoreInformation(weatherObj[i], [
@@ -299,6 +300,13 @@ const View = (function () {
       containerElements.push(container);
     }
     return containerElements;
+  };
+
+  const displayCardInfo = function (e) {
+    const dayCard = e.target.parentElement;
+    const moreInfoContainer = e.target.parentElement.nextElementSibling;
+    moreInfoContainer.classList.toggle('displayed-card');
+    dayCard.classList.toggle('displayed-card');
   };
 
   function todaySection(weatherObj, cityName, countryName) {
@@ -384,6 +392,7 @@ const View = (function () {
     todaySection,
     tomorrowSection,
     sixDaysSection,
+    displayCardInfo,
   };
 })();
 
