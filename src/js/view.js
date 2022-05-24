@@ -44,6 +44,26 @@ const View = (function () {
     }
   };
 
+  const displayLoader = function (message, error) {
+    clearContent();
+    let loader;
+    if (!error) {
+      loader = _createElement('div', 'loader');
+    } else {
+      loader = _createElement('div', 'error');
+      loader.classList.add('small-x');
+    }
+    const loadContainer = _createElement('div', 'load-container');
+    const legend = _createElement(
+      'h2',
+      'loading-info',
+      '',
+      `${error ? `${message} Please enter a valid city name` : `${message}`}`
+    );
+    loadContainer.append(loader, legend);
+    _generalContainer.append(loadContainer);
+  };
+
   const toggleActiveSection = function (element) {
     let activeSection = document.querySelector('.active-section');
     if (element.classList.contains('section-name')) {
@@ -57,7 +77,6 @@ const View = (function () {
     const propertyEl = _createElement('p', '', '', property);
     const valueEl = _createElement('p', '', '', value + ' °C');
     detailContainer.append(propertyEl, valueEl);
-
     return detailContainer;
   };
 
@@ -353,6 +372,7 @@ const View = (function () {
   }
 
   return {
+    displayLoader,
     toggleActiveSection,
     todaySection,
     tomorrowSection,

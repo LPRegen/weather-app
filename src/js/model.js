@@ -1,4 +1,5 @@
 'use strict';
+import { View } from './view.js';
 
 const weatherInformation = (function () {
   const _apiKey = '7f1fbcd5b4f7fd4e0d1795060fcd8a3c';
@@ -29,7 +30,6 @@ const weatherInformation = (function () {
       day: 'numeric',
     };
     if (getHour) {
-      // let fullDate = new Date(1000 * dt);
       let hours = `${convertDate.getHours()}`;
       let minutes = `0${convertDate.getMinutes()}`;
       let amPm = hours >= 12 ? 'pm' : 'am';
@@ -45,7 +45,7 @@ const weatherInformation = (function () {
   /**
    * Fetch lat and lon based on cityName
    * @param  {string} cityName Name of the city
-   * @return  {array} Array with coordinates.
+   * @return {object} Object with information about location.
    */
   async function getLocation(cityName) {
     try {
@@ -58,6 +58,8 @@ const weatherInformation = (function () {
         dataResponse[0].lat.toFixed(2),
         dataResponse[0].lon.toFixed(2),
       ];
+      View.displayLoader('Searching location, please wait.');
+
       return {
         country: dataResponse[0].country,
         cityName: dataResponse[0].name,
@@ -65,7 +67,7 @@ const weatherInformation = (function () {
         latLon: coord,
       };
     } catch (error) {
-      console.log(error.message);
+      View.displayLoader(error.message, error);
     }
   }
 
@@ -83,16 +85,7 @@ const weatherInformation = (function () {
       const dataResponse = await response.json();
       return dataResponse;
     } catch (error) {
-      console.log(error.message);
-    }
-  }
-
-  async function requestData(cityName) {
-    try {
-      let locationInfo = await getLocation(cityName);
-      return fetchData(locationInfo.latLon);
-    } catch (error) {
-      console.log(error);
+      View.displayLoader(error.message);
     }
   }
 
@@ -107,7 +100,6 @@ const weatherInformation = (function () {
     regionNames,
     convertDateToLocale,
     fetchData,
-    requestData,
     getLocation,
     destructureObject,
   };
