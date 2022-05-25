@@ -70,6 +70,7 @@ const weatherInformation = (function () {
       };
     } catch (error) {
       View.displayLoader(error.message, error);
+      delete _generalContainer.dataset.searching;
     }
   }
 
