@@ -17,7 +17,7 @@ const View = (function () {
     return modified.charAt(0).toUpperCase() + modified.slice(1);
   };
 
-  const _createElement = function (element, className, id, textContent) {
+  const createElement = function (element, className, id, textContent) {
     const newElement = document.createElement(element);
     if (className) newElement.classList.add(className);
     if (id) newElement.id = id;
@@ -25,12 +25,12 @@ const View = (function () {
     return newElement;
   };
 
-  const _createContainers = function (sixDays) {
-    const _topContainer = _createElement('div', 'top-container');
-    const _currentFeelsTemp = _createElement('div', 'current-feels-temp');
-    const _todayDetails = _createElement('div', 'today-details');
-    const _dailyDetails = _createElement('div', 'daily-details');
-    const _cards = _createElement('div', 'cards');
+  const createContainers = function (sixDays) {
+    const _topContainer = createElement('div', 'top-container');
+    const _currentFeelsTemp = createElement('div', 'current-feels-temp');
+    const _todayDetails = createElement('div', 'today-details');
+    const _dailyDetails = createElement('div', 'daily-details');
+    const _cards = createElement('div', 'cards');
     if (sixDays) {
       _generalContainer.append(_cards);
     } else {
@@ -48,13 +48,13 @@ const View = (function () {
     clearContent();
     let loader;
     if (!error) {
-      loader = _createElement('div', 'loader');
+      loader = createElement('div', 'loader');
     } else {
-      loader = _createElement('div', 'error');
+      loader = createElement('div', 'error');
       loader.classList.add('small-x');
     }
-    const loadContainer = _createElement('div', 'load-container');
-    const legend = _createElement(
+    const loadContainer = createElement('div', 'load-container');
+    const legend = createElement(
       'h2',
       'loading-info',
       '',
@@ -73,9 +73,9 @@ const View = (function () {
   };
 
   const _createDetailContainer = function (property, value) {
-    const detailContainer = _createElement('div', 'detail-container');
-    const propertyEl = _createElement('p', '', '', property);
-    const valueEl = _createElement('p', '', '', value + ' °C');
+    const detailContainer = createElement('div', 'detail-container');
+    const propertyEl = createElement('p', '', '', property);
+    const valueEl = createElement('p', '', '', value + ' °C');
     detailContainer.append(propertyEl, valueEl);
     return detailContainer;
   };
@@ -88,20 +88,20 @@ const View = (function () {
    * @returns {htmlElement} HTML element.
    */
   const _createLocationContainer = function (timestamp, cityName, countryName) {
-    const locationInfo = _createElement('div', 'location-info');
-    const cityLocation = _createElement(
+    const locationInfo = createElement('div', 'location-info');
+    const cityLocation = createElement(
       'p',
       '',
       'city-location',
       `${cityName},`
     );
-    const countryLocation = _createElement(
+    const countryLocation = createElement(
       'p',
       '',
       'country-location',
       ` ${weatherInformation.regionNames(countryName)}`
     );
-    const dateElement = _createElement(
+    const dateElement = createElement(
       'p',
       '',
       'date',
@@ -118,14 +118,14 @@ const View = (function () {
    * @returns {htmlElement} HTML Element.
    */
   const _createWeatherDescription = function (weatherObject) {
-    const container = _createElement('div', 'weather-details');
-    const description = _createElement(
+    const container = createElement('div', 'weather-details');
+    const description = createElement(
       'p',
       'icon-description',
       'weather-description',
       weatherObject.weather[0].description
     );
-    const weatherIcon = _createElement('img', 'weather-icon', 'weather-icon');
+    const weatherIcon = createElement('img', 'weather-icon', 'weather-icon');
     container.append(weatherIcon, description);
     weatherIcon.alt = 'Weather icon.';
     weatherIcon.src = `http://openweathermap.org/img/wn/${weatherObject.weather[0].icon}@2x.png`;
@@ -134,25 +134,25 @@ const View = (function () {
 
   const _createCurrentTemp = function (currTemp, feelsTemp, todayTemp) {
     const roundedTemp = [Math.round(currTemp), Math.round(feelsTemp)];
-    const currentTemp = _createElement(
+    const currentTemp = createElement(
       'h1',
       'current-temp',
       '',
       `${roundedTemp[0]} °C`
     );
-    const feelsLikeTemp = _createElement(
+    const feelsLikeTemp = createElement(
       'h2',
       'feels-temp',
       '',
       `${roundedTemp[1]} °C`
     );
-    const smallCurrent = _createElement(
+    const smallCurrent = createElement(
       'small',
       'small',
       '',
       `${todayTemp ? 'Current temperature' : 'Max temperature'}`
     );
-    const smallFeels = _createElement(
+    const smallFeels = createElement(
       'small',
       'small',
       '',
@@ -171,20 +171,20 @@ const View = (function () {
   const _createHourCard = function (hourlyObject, fromHour = 1, toHour = 9) {
     let cardElements = [];
 
-    const title = _createElement('h3', 'title-details', '', 'Hourly details');
+    const title = createElement('h3', 'title-details', '', 'Hourly details');
 
     for (let i = fromHour; i < toHour; i++) {
-      const card = _createElement('div', 'card-hourly');
-      const detailHours = _createElement('div', 'detail-hours');
-      const hourEl = _createElement(
+      const card = createElement('div', 'card-hourly');
+      const detailHours = createElement('div', 'detail-hours');
+      const hourEl = createElement(
         'h4',
         'hour',
         '',
         `${weatherInformation.convertDateToLocale(hourlyObject[i].dt, true)}`
       );
-      const iconContainer = _createElement('div', 'weather-icon');
-      const smallIcon = _createElement('img', 'hourly-icon');
-      const iconDescription = _createElement(
+      const iconContainer = createElement('div', 'weather-icon');
+      const smallIcon = createElement('img', 'hourly-icon');
+      const iconDescription = createElement(
         'p',
         'icon-description',
         '',
@@ -213,16 +213,16 @@ const View = (function () {
     return cardElements;
   };
 
-  const _updateMoreInformation = function (weatherObj, options) {
+  const updateMoreInformation = function (weatherObj, options) {
     let elements = [];
     const information = weatherInformation.destructureObject(weatherObj, [
       ...options,
     ]);
 
     for (const property in information) {
-      const container = _createElement('div', 'more-information');
-      const description = _createElement('p');
-      const value = _createElement('p');
+      const container = createElement('div', 'more-information');
+      const description = createElement('p');
+      const value = createElement('p');
       container.append(description, value);
       description.textContent = _modifyString(property);
       switch (property) {
@@ -245,65 +245,6 @@ const View = (function () {
     return elements;
   };
 
-  const _createSixDaysCard = function (weatherObj) {
-    let containerElements = [];
-    const sectionTitle = _createElement(
-      'h3',
-      'six-days-details',
-      '',
-      'Next six days'
-    );
-    containerElements.push(sectionTitle);
-
-    for (let i = 1; i < weatherObj.length; i++) {
-      const container = _createElement('div', 'six-days-card');
-      const upperContainer = _createElement('div', 'upper-container');
-      const tempContainer = _createElement('div', 'temperature');
-      const maxTemp = _createElement(
-        'p',
-        'max-temp',
-        '',
-        `${Math.round(weatherObj[i].temp.max)} °C`
-      );
-      const minTemp = _createElement(
-        'p',
-        'min-temp',
-        '',
-        `${Math.round(weatherObj[i].temp.min)} °C`
-      );
-      const cardDate = _createElement(
-        'p',
-        'card-date',
-        '',
-        `${weatherInformation.convertDateToLocale(weatherObj[i].dt)}`
-      );
-      const weatherIcon = _createElement('img', 'six-days-icon');
-      weatherIcon.alt = `${weatherObj[i].weather[0].description}`;
-      weatherIcon.src = `http://openweathermap.org/img/wn/${weatherObj[i].weather[0].icon}@2x.png`;
-      const spanMoreInfo = _createElement(
-        'span',
-        'material-symbols-outlined',
-        '',
-        'expand_circle_down'
-      );
-      spanMoreInfo.title = 'Click for more information';
-      spanMoreInfo.classList.add('display-more');
-
-      const infoContainer = _createElement('div', 'six-days-info');
-      let moreInformation = _updateMoreInformation(weatherObj[i], [
-        'humidity',
-        'uvi',
-        'wind_speed',
-      ]);
-      container.append(upperContainer, infoContainer);
-      upperContainer.append(tempContainer, cardDate, weatherIcon, spanMoreInfo);
-      tempContainer.append(maxTemp, minTemp);
-      moreInformation.forEach((html) => infoContainer.append(html));
-      containerElements.push(container);
-    }
-    return containerElements;
-  };
-
   const displayCardInfo = function (e) {
     const dayCard = e.target.parentElement;
     const moreInfoContainer = e.target.parentElement.nextElementSibling;
@@ -314,7 +255,7 @@ const View = (function () {
   function todaySection(weatherObj, cityName, countryName) {
     delete _generalContainer.dataset.searching;
     clearContent();
-    _createContainers();
+    createContainers();
     let location = _createLocationContainer(
       weatherObj.current.dt,
       cityName,
@@ -326,7 +267,7 @@ const View = (function () {
       weatherObj.current.feels_like,
       true
     );
-    let moreInformation = _updateMoreInformation(weatherObj.current, [
+    let moreInformation = updateMoreInformation(weatherObj.current, [
       'humidity',
       'uvi',
       'wind_speed',
@@ -349,14 +290,14 @@ const View = (function () {
 
   function tomorrowSection(weatherObj, cityName, countryName) {
     clearContent();
-    _createContainers();
+    createContainers();
     let location = _createLocationContainer(
       weatherObj.daily[1].dt,
       cityName,
       countryName
     );
     let weatherDescription = _createWeatherDescription(weatherObj.daily[1]);
-    let moreInformation = _updateMoreInformation(weatherObj.daily[1], [
+    let moreInformation = updateMoreInformation(weatherObj.daily[1], [
       'humidity',
       'uvi',
       'wind_speed',
@@ -381,20 +322,15 @@ const View = (function () {
     );
   }
 
-  function sixDaysSection(weatherObj) {
-    clearContent();
-    _createContainers(true);
-    _createSixDaysCard(weatherObj.daily).forEach((html) =>
-      document.querySelector('.cards').append(html)
-    );
-  }
-
   return {
+    createElement,
+    clearContent,
+    createContainers,
+    updateMoreInformation,
     displayLoader,
     toggleActiveSection,
     todaySection,
     tomorrowSection,
-    sixDaysSection,
     displayCardInfo,
   };
 })();

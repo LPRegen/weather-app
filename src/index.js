@@ -1,6 +1,7 @@
 // import './styles/style.scss';
 import { weatherInformation } from './js/model.js';
 import { View } from './js/view.js';
+import { SixDaysModule } from './js/six-days.js';
 
 const searchInput = document.querySelector('#location-search');
 const searchForm = document.querySelector('.search-container');
@@ -45,7 +46,7 @@ sectionContainer.addEventListener('click', async function (e) {
       );
       break;
     case 'six-days-section':
-      View.sixDaysSection(weatherInfo);
+      SixDaysModule.sixDaysSection(weatherInfo);
       break;
   }
 });
