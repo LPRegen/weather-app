@@ -310,6 +310,7 @@ const View = (function () {
   };
 
   function todaySection(weatherObj, cityName, countryName) {
+    delete _generalContainer.dataset.searching;
     clearContent();
     _createContainers();
     let location = _createLocationContainer(

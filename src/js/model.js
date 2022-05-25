@@ -3,6 +3,7 @@ import { View } from './view.js';
 
 const weatherInformation = (function () {
   const _apiKey = '7f1fbcd5b4f7fd4e0d1795060fcd8a3c';
+  const _generalContainer = document.querySelector('.general-container');
 
   /**
    * Fetch lat and lon based on cityName
@@ -49,6 +50,7 @@ const weatherInformation = (function () {
    */
   async function getLocation(cityName) {
     try {
+      _generalContainer.dataset.searching = 'true';
       let response = await fetch(
         `http://api.openweathermap.org/geo/1.0/direct?q=${cityName},&limit=1&appid=${_apiKey}`,
         { mode: 'cors' }

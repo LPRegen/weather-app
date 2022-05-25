@@ -1,4 +1,4 @@
-import './styles/style.scss';
+// import './styles/style.scss';
 import { weatherInformation } from './js/model.js';
 import { View } from './js/view.js';
 
@@ -11,11 +11,11 @@ const generalContainer = document.querySelector('.general-container');
 let locationInfo;
 let weatherInfo;
 
-(async function displayOnLoad() {
-  locationInfo = await weatherInformation.getLocation('Roma');
-  weatherInfo = await weatherInformation.fetchData(locationInfo.latLon);
-  View.todaySection(weatherInfo, locationInfo.cityName, locationInfo.country);
-})();
+// (async function displayOnLoad() {
+//   locationInfo = await weatherInformation.getLocation('Roma');
+//   weatherInfo = await weatherInformation.fetchData(locationInfo.latLon);
+//   View.todaySection(weatherInfo, locationInfo.cityName, locationInfo.country);
+// })();
 
 async function searchLocation(e) {
   e.preventDefault();
@@ -51,7 +51,10 @@ sectionContainer.addEventListener('click', async function (e) {
 });
 
 searchForm.addEventListener('submit', (e) => {
-  searchLocation(e);
+  e.preventDefault();
+  if (!generalContainer.dataset.searching && searchInput.value.trim() != '') {
+    searchLocation(e);
+  }
 });
 
 searchIcon.addEventListener('click', (e) => {
