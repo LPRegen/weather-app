@@ -206,7 +206,9 @@ const View = (function () {
       smallIcon.alt = 'Weather icon.';
       cardElements.push(card);
     }
-    document.querySelector('.cards').insertAdjacentElement('afterbegin', title);
+    document
+      .querySelector('.cards')
+      .insertAdjacentElement('beforebegin', title);
 
     return cardElements;
   };
