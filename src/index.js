@@ -66,7 +66,9 @@ searchForm.addEventListener('submit', (e) => {
 });
 
 searchIcon.addEventListener('click', (e) => {
-  if (searchForm.value) searchLocation(e);
+  if (!generalContainer.dataset.searching && searchInput.value.trim() != '') {
+    searchLocation(e);
+  }
 });
 
 generalContainer.addEventListener('click', (e) => {
