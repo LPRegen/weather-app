@@ -3,6 +3,9 @@ import { weatherInformation } from './model';
 const View = (function () {
   const _generalContainer = document.querySelector('.general-container');
 
+  /**
+   * Delete content of .general-container
+   */
   const clearContent = function () {
     _generalContainer.textContent = '';
   };
@@ -17,6 +20,14 @@ const View = (function () {
     return modified.charAt(0).toUpperCase() + modified.slice(1);
   };
 
+  /**
+   * Updates displayed location and date.
+   * @param {string} element Element name to create.
+   * @param {string} className Class name to add.
+   * @param {string} id Id name to add.
+   * @param {string} textContent Text content for the new element.
+   * @returns {html} New html element.
+   */
   const createElement = function (element, className, id, textContent) {
     const newElement = document.createElement(element);
     if (className) newElement.classList.add(className);
@@ -25,6 +36,10 @@ const View = (function () {
     return newElement;
   };
 
+  /**
+   * Create container elements and append them into .general-container.
+   * @param {boolean} sixDays If true, just create _cards container.
+   */
   const createContainers = function (sixDays) {
     const _topContainer = createElement('div', 'top-container');
     const _currentFeelsTemp = createElement('div', 'current-feels-temp');
@@ -44,6 +59,11 @@ const View = (function () {
     }
   };
 
+  /**
+   * Display loader and/or error message until API call has a response.
+   * @param {string} message Message to display while data is being fetched.
+   * @param {object} error Error message.
+   */
   const displayLoader = function (message, error) {
     clearContent();
     let loader;
@@ -64,7 +84,12 @@ const View = (function () {
     _generalContainer.append(loadContainer);
   };
 
+  /**
+   * Toggle active section of section elements.
+   * @param {object} element HTML element to apply '.active-section'.
+   */
   const toggleActiveSection = function (element) {
+    console.log(typeof element);
     let activeSection = document.querySelector('.active-section');
     if (element.classList.contains('section-name')) {
       activeSection.classList.remove('active-section');
@@ -72,6 +97,12 @@ const View = (function () {
     }
   };
 
+  /**
+   * Creates details section.
+   * @param {string} property Property name.
+   * @param {string} value Value asociated to property.
+   * @returns {object} Returns HTML element.
+   */
   const _createDetailContainer = function (property, value) {
     const detailContainer = createElement('div', 'detail-container');
     const propertyEl = createElement('p', '', '', property);
@@ -132,6 +163,13 @@ const View = (function () {
     return container;
   };
 
+  /**
+   * Toggle active section of section elements.
+   * @param {number} currTemp Current temperature.
+   * @param {number} feelsTemp Current feels temperature.
+   * @param {number} todayTemp Temperature for today.
+   * @returns {array} Array that contains HTML elements.
+   */
   const _createCurrentTemp = function (currTemp, feelsTemp, todayTemp) {
     const roundedTemp = [Math.round(currTemp), Math.round(feelsTemp)];
     const currentTemp = createElement(
@@ -166,7 +204,7 @@ const View = (function () {
    * @param {Object} hourlyObject Hourly object retrieved from API call.
    * @param {number} fromHour Starting hour, default 1.
    * @param {number} toHour Ending hour, default 9.
-   * @return HTML element with information about weather in the next 8 hours(default).
+   * @return HTML element with information about weather in the next 8 hours (default).
    */
   const _createHourCard = function (hourlyObject, fromHour = 1, toHour = 9) {
     let cardElements = [];
@@ -213,6 +251,12 @@ const View = (function () {
     return cardElements;
   };
 
+  /**
+   * Creates card with information by hours.
+   * @param {Object} weatherObj Weather object.
+   * @param {array} options Options to retrieve more details.
+   * @return HTML elements.
+   */
   const updateMoreInformation = function (weatherObj, options) {
     let elements = [];
     const information = weatherInformation.destructureObject(weatherObj, [
@@ -245,6 +289,10 @@ const View = (function () {
     return elements;
   };
 
+  /**
+   * Toggle class list over HTML element to display more information about days.
+   * @param {object} e Event object.
+   */
   const displayCardInfo = function (e) {
     const dayCard = e.target.parentElement;
     const moreInfoContainer = e.target.parentElement.nextElementSibling;
