@@ -181,6 +181,11 @@ h6 {
   text-transform: capitalize;
 }
 
+.six-days-details {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
 .cards {
   margin-bottom: 2rem;
 
@@ -188,16 +193,11 @@ h6 {
     margin-bottom: 1rem;
   }
 
-  .six-days-details {
-    margin-left: 1.5rem;
-    margin-bottom: 1rem;
-  }
-
   .card-hourly {
     display: flex;
     justify-content: space-between;
 
-    margin: 1rem;
+    margin: 1rem 0;
     border-radius: 10px;
     padding: 1rem 1rem;
     margin-bottom: 1rem;
@@ -218,7 +218,7 @@ h6 {
     .weather-icon {
       display: grid;
       justify-items: center;
-      align-content: flex-end;
+      align-content: center;
 
       .hourly-icon {
         width: 70px;
@@ -387,12 +387,8 @@ footer {
   }
 }
 
-@media (min-width: 600px) {
+@media (min-width: 700px) {
   .search-container {
-    margin: 2rem;
-  }
-
-  .general-container {
     margin: 2rem;
   }
 
@@ -411,6 +407,10 @@ footer {
   }
 
   .cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+
     .title-details {
       font-size: 1.2rem;
     }
@@ -426,15 +426,15 @@ footer {
           gap: 1rem;
         }
 
-        .card-date {
-          font-size: 1.1rem;
-        }
+        // .card-date {
+        //   // font-size: 0.8rem;
+        // }
 
         .max-temp {
-          font-size: 1.5rem;
+          font-size: 1.2rem;
         }
         .min-temp {
-          font-size: 1.2rem;
+          font-size: 0.9rem;
         }
 
         .six-days-icon {
@@ -462,13 +462,6 @@ footer {
       #city-location {
         font-size: 1.4rem;
       }
-    }
-  }
-
-  .daily-details {
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
     }
   }
 
