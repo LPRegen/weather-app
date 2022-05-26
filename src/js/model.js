@@ -21,7 +21,7 @@ const weatherInformation = (function () {
    * Converts time stamp to locale's format date.
    * @param {number} timestamp Time stamp.
    * @param {boolean} gethour If true, returns the hour.
-   * @returns {string} Formated date.
+   * @returns {string} Formated date to locale.
    */
   const convertDateToLocale = function (timestamp, getHour) {
     const convertDate = new Date(timestamp * 1000);
@@ -92,6 +92,12 @@ const weatherInformation = (function () {
     }
   }
 
+  /**
+   * Returns key-value pair of selected properties.
+   * @param  {object} object Object to filter.
+   * @param  {array} properties Properties to select.
+   * @returns {array} Returns array with key-value pairs of selected properties.
+   */
   const destructureObject = function (object, properties) {
     let information = Object.fromEntries(
       [...properties].map((key) => [key, Math.round(object[key])])
