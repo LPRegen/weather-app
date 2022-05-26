@@ -8,6 +8,7 @@ const SixDaysModule = (function () {
    * @returns {array} Returns array with html elements
    */
   const _createSixDaysCard = function (weatherObj) {
+    const cardsContainer = document.querySelector('.cards');
     let containerElements = [];
     const sectionTitle = View.createElement(
       'h3',
@@ -15,7 +16,7 @@ const SixDaysModule = (function () {
       '',
       'Next six days'
     );
-    containerElements.push(sectionTitle);
+    cardsContainer.insertAdjacentElement('beforebegin', sectionTitle);
 
     for (let i = 1; i < weatherObj.length; i++) {
       const container = View.createElement('div', 'six-days-card');
