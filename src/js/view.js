@@ -89,7 +89,6 @@ const View = (function () {
    * @param {object} element HTML element to apply '.active-section'.
    */
   const toggleActiveSection = function (element) {
-    console.log(typeof element);
     let activeSection = document.querySelector('.active-section');
     if (element.classList.contains('section-name')) {
       activeSection.classList.remove('active-section');
