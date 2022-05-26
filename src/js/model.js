@@ -88,7 +88,7 @@ const weatherInformation = (function () {
       const dataResponse = await response.json();
       return dataResponse;
     } catch (error) {
-      View.displayLoader(error.message);
+      View.displayLoader(error.message, error);
     }
   }
 

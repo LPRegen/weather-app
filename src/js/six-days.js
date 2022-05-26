@@ -2,6 +2,11 @@ import { View } from './view';
 import { weatherInformation } from './model';
 
 const SixDaysModule = (function () {
+  /**
+   * Create cards for the next six days with weather information.
+   * @param {object} weatherObj Weather object.
+   * @returns {array} Returns array with html elements
+   */
   const _createSixDaysCard = function (weatherObj) {
     let containerElements = [];
     const sectionTitle = View.createElement(
@@ -61,6 +66,11 @@ const SixDaysModule = (function () {
     return containerElements;
   };
 
+  /**
+   * Clear content, creates containers and append next six days cards.
+   * @param {object} weatherObj Weather object.
+   *
+   */
   function sixDaysSection(weatherObj) {
     View.clearContent();
     View.createContainers(true);

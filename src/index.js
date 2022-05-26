@@ -1,4 +1,3 @@
-// import './styles/style.scss';
 import { weatherInformation } from './js/model.js';
 import { View } from './js/view.js';
 import { SixDaysModule } from './js/six-days.js';
@@ -12,12 +11,20 @@ const generalContainer = document.querySelector('.general-container');
 let locationInfo;
 let weatherInfo;
 
+/**
+ * Makes API call on page load.
+ * @param {object} e Event object.
+ */
 // (async function displayOnLoad() {
 //   locationInfo = await weatherInformation.getLocation('Roma');
 //   weatherInfo = await weatherInformation.fetchData(locationInfo.latLon);
 //   View.todaySection(weatherInfo, locationInfo.cityName, locationInfo.country);
 // })();
 
+/**
+ * Searchs location given by user.
+ * @param {object} e Event object.
+ */
 async function searchLocation(e) {
   e.preventDefault();
   View.toggleActiveSection(todaySection);
