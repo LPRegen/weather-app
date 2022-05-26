@@ -15,11 +15,11 @@ let weatherInfo;
  * Makes API call on page load.
  * @param {object} e Event object.
  */
-// (async function displayOnLoad() {
-//   locationInfo = await weatherInformation.getLocation('Roma');
-//   weatherInfo = await weatherInformation.fetchData(locationInfo.latLon);
-//   View.todaySection(weatherInfo, locationInfo.cityName, locationInfo.country);
-// })();
+(async function displayOnLoad() {
+  locationInfo = await weatherInformation.getLocation('Roma');
+  weatherInfo = await weatherInformation.fetchData(locationInfo.latLon);
+  View.todaySection(weatherInfo, locationInfo.cityName, locationInfo.country);
+})();
 
 /**
  * Searchs location given by user.
