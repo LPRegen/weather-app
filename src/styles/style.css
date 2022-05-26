@@ -52,6 +52,10 @@ h6 {
   isolation: isolate;
 }
 
+header {
+  background-color: #df7b23;
+}
+
 .search-container {
   margin: 0.5rem;
   display: flex;
@@ -60,7 +64,9 @@ h6 {
 }
 .search-container .search-input {
   width: 80%;
-  padding: 0.3rem 0.2rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 10px;
+  border: 1px;
 }
 .search-container .search-btn {
   display: flex;
@@ -79,7 +85,7 @@ h6 {
 
 .sections {
   display: flex;
-  margin: 1rem 0.5rem 2rem 0.5rem;
+  margin: 1rem 0.5rem 1rem 0.5rem;
   justify-content: space-around;
   align-content: space-between;
 }
@@ -166,6 +172,7 @@ h6 {
 }
 
 .six-days-details {
+  margin: 1rem 0 1rem 1rem;
   margin-left: 1.5rem;
   margin-bottom: 1rem;
 }
@@ -319,7 +326,7 @@ h6 {
   padding: 1rem;
 }
 .back-to-top :visited {
-  color: white;
+  color: black;
 }
 
 footer a {
@@ -328,7 +335,7 @@ footer a {
   align-items: center;
   width: 100%;
   padding: 0.5rem 0;
-  background-color: rgba(113, 108, 108, 0.645);
+  background-color: #df7b23;
   text-decoration: none;
 }
 footer a .github-icon {
@@ -364,9 +371,7 @@ footer a:visited {
   }
 
   .cards {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
+    gap: 1rem;
   }
   .cards .title-details {
     font-size: 1.2rem;
