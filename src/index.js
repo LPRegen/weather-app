@@ -1,4 +1,3 @@
-import './styles/style.css';
 import { weatherInformation } from './js/model.js';
 import { View } from './js/view.js';
 import { SixDaysModule } from './js/six-days.js';

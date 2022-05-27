@@ -52,7 +52,7 @@ const weatherInformation = (function () {
     try {
       _generalContainer.dataset.searching = 'true';
       let response = await fetch(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${cityName},&limit=1&appid=${_apiKey}`,
+        `https://api.openweathermap.org/geo/1.0/direct?q=${cityName},&limit=1&appid=${_apiKey}`,
         { mode: 'cors' }
       );
       const dataResponse = await response.json();
