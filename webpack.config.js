@@ -1,5 +1,6 @@
 const path = require('path');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -10,7 +11,15 @@ module.exports = {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
   },
-  plugins: [new ESLintPlugin()],
+  plugins: [
+    new ESLintPlugin(),
+    new HtmlWebpackPlugin({
+      hash: true,
+      title: 'Weather App',
+      template: './src/index.html',
+      filename: './index.html',
+    }),
+  ],
   module: {
     rules: [
       {
