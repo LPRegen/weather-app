@@ -20,7 +20,7 @@ body {
   display: flex;
   flex-direction: column;
   line-height: 1.5;
-  font-family: 'Roboto Flex', sans-serif;
+  font-family: "Roboto Flex", sans-serif;
   background-color: #f1bd8e;
 }
 
@@ -283,10 +283,8 @@ header {
   margin: 5rem 1rem;
 }
 .load-container .loader {
-  border: 8px solid #f3f3f3;
-  /* Light grey */
-  border-top: 8px solid #42708f;
-  /* Blue */
+  border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid #42708f; /* Blue */
   border-radius: 50%;
   width: 60px;
   height: 60px;
@@ -305,14 +303,14 @@ header {
   bottom: 0;
   left: 0;
   right: 0;
-  content: '❌';
+  content: "❌";
   font-size: 50px;
   color: #fff;
   line-height: 100px;
   text-align: center;
 }
 .load-container .small-x:after {
-  content: '×';
+  content: "×";
 }
 
 .back-to-top {
@@ -358,18 +356,15 @@ footer a:visited {
   .search-container {
     margin: 2rem;
   }
-
   .top-container #date {
     font-size: 1.2rem;
   }
   .top-container #city-location {
     font-size: 1.6rem;
   }
-
   .icon-description {
     font-size: 1rem;
   }
-
   .cards {
     gap: 1rem;
   }
@@ -399,14 +394,12 @@ footer a:visited {
     font-size: 1.6rem;
     letter-spacing: 2px;
   }
-
   .top-container .location-info #date {
     font-size: 1.2rem;
   }
   .top-container .location-info #city-location {
     font-size: 1.4rem;
   }
-
   .more-information {
     font-size: 1.2rem;
   }
@@ -416,7 +409,6 @@ footer a:visited {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
   }
-
   .six-days-card {
     margin-bottom: 1rem;
   }
