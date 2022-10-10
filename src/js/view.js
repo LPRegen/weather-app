@@ -166,7 +166,7 @@ const View = (function () {
    * Toggle active section of section elements.
    * @param {number} currTemp Current temperature.
    * @param {number} feelsTemp Current feels temperature.
-   * @param {number} todayTemp Temperature for today.
+   * @param {boolean} todayTemp Temperature for today.
    * @returns {array} Array that contains HTML elements.
    */
   const _createCurrentTemp = function (currTemp, feelsTemp, todayTemp) {
@@ -185,17 +185,24 @@ const View = (function () {
     );
     const smallCurrent = createElement(
       'small',
-      'small',
+      'small-info',
       '',
       `${todayTemp ? 'Current temperature' : 'Max temperature'}`
     );
     const smallFeels = createElement(
       'small',
-      'small',
+      'small-info',
       '',
       `${todayTemp ? 'Feels like' : 'Min temperature'}`
     );
-    return [currentTemp, feelsLikeTemp, smallCurrent, smallFeels];
+
+    const currentContainer = createElement('div', 'temp-container');
+    const feelsContainer = createElement('div', 'temp-container');
+
+    currentContainer.append(currentTemp, smallCurrent);
+    feelsContainer.append(feelsLikeTemp, smallFeels);
+
+    return [currentContainer, feelsContainer];
   };
 
   /**
