@@ -1,0 +1,51 @@
+.daily-details {
+  .title-details {
+    font-size: 1.4rem;
+  }
+
+  .cards {
+    display: grid;
+    margin-top: 1.5rem;
+    gap: 1rem;
+
+    .card-hourly {
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 0.6rem;
+      background-color: #bbcef1;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px -2px #0000008c;
+
+      .detail-hours {
+        .hour {
+          font-size: 1.2rem;
+        }
+
+        .detail-container {
+          display: flex;
+          justify-content: space-between;
+          gap: 2rem;
+          padding-top: 1rem;
+        }
+      }
+
+      .weather-icon {
+        width: fit-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .hourly-icon {
+          display: flex;
+          justify-content: center;
+        }
+
+        .icon-description {
+          text-transform: capitalize;
+          display: flex;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}

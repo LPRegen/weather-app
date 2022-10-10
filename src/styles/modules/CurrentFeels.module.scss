@@ -1,0 +1,12 @@
+.current-feels-temp {
+  display: flex;
+  position: relative;
+  justify-content: space-around;
+
+  .temp-container {
+    display: grid;
+    gap: 0.4rem;
+    justify-items: center;
+    align-self: flex-end;
+  }
+}
