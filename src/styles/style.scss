@@ -1,6 +1,13 @@
-// ! Variables.
-$backgrund: #f1bd8e;
-$card-background: #f29f51;
+@import 'modules/Header.module.scss';
+@import 'modules/TopContainer.module.scss';
+@import 'modules/CurrentFeels.module.scss';
+@import 'modules/TodayDetails.module.scss';
+@import 'modules/HourlyDetails.module.scss';
+@import 'modules/Footer.module.scss';
+@import 'modules/SixDays.module.scss';
+
+$background: #d5dce4;
+$card-background: #ffeedd;
 $card-shadow: rgba(0, 0, 0, 0.25);
 
 // ! Reset
@@ -26,7 +33,7 @@ body {
   flex-direction: column;
   line-height: 1.5;
   font-family: 'Roboto Flex', sans-serif;
-  background-color: $backgrund;
+  background-color: $background;
 }
 
 img,
@@ -57,332 +64,29 @@ h6 {
   isolation: isolate;
 }
 
-header {
-  background-color: #df7b23;
-}
-
-.search-container {
-  margin: 0.5rem;
-  display: flex;
-  gap: 1rem;
-  justify-content: space-around;
-
-  .search-input {
-    width: 80%;
-    padding: 0.3rem 0.5rem;
-    border-radius: 10px;
-    border: 1px;
-  }
-
-  .search-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    border: 1px solid transparent;
-    background-color: #42708f;
-    border-radius: 100px;
-    filter: drop-shadow(0px 4px 4px $card-shadow);
-
-    span {
-      padding: 0.5rem;
-      color: white;
-    }
-  }
-}
-
-.sections {
-  display: flex;
-  margin: 1rem 0.5rem 1rem 0.5rem;
-  justify-content: space-around;
-  align-content: space-between;
-
-  .active-section {
-    text-decoration: underline;
-  }
-
-  .section-name {
-    font-size: 1.2rem;
-    letter-spacing: 1px;
-    cursor: pointer;
-  }
-}
-
 .general-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.top-container {
-  display: flex;
-  justify-content: space-around;
-  margin: 0 1rem;
-
-  .location-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-
-    #date {
-      font-size: 0.8rem;
-    }
-
-    #city-location {
-      font-size: 1.2rem;
-    }
-  }
+  display: grid;
+  gap: 3rem;
+  margin: 1rem;
+  min-height: auto;
 }
 
 .weather-details {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.current-feels-temp {
   display: grid;
-  grid-template-columns: repeat(2, 0.5fr);
-  grid-template-rows: 2fr 0.5fr;
-  justify-items: center;
-  align-items: baseline;
-  margin: 2rem 3rem;
+  justify-content: center;
 
-  .current-temp {
-    display: grid;
-    grid-column: 1/2;
-    font-size: 3rem;
-  }
-
-  .feels-temp {
-    display: grid;
-    grid-column: 2/3;
-    font-size: 2rem;
-  }
-
-  .small {
-    display: grid;
-    grid-row: 2/3;
-  }
-}
-
-.today-details {
-  margin: 0 1.5rem 2rem 1.5rem;
-
-  .more-information {
-    display: flex;
-    justify-content: space-between;
-    margin: 0 1rem;
-  }
-}
-
-.daily-details {
-  margin: 0 1.5rem;
-}
-
-.icon-description {
-  font-size: 0.9rem;
-}
-.icon-description::first-letter {
-  text-transform: capitalize;
-}
-
-.six-days-details {
-  margin: 1rem 0 1rem 1rem;
-  margin-left: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.cards {
-  margin-bottom: 2rem;
-
-  .title-details {
-    margin-bottom: 1rem;
-  }
-
-  .card-hourly {
-    display: flex;
-    justify-content: space-between;
-
-    margin: 1rem 0;
-    border-radius: 10px;
-    padding: 1rem 1rem;
-    margin-bottom: 1rem;
-    background-color: $card-background;
-    filter: drop-shadow(0px 4px 4px $card-shadow);
-
-    .details-hour p {
-      font-size: 0.9rem;
-    }
-
-    .detail-container {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .weather-icon {
-      display: grid;
-      justify-items: center;
-      align-content: center;
-
-      .hourly-icon {
-        width: 70px;
-        height: 70px;
-      }
-
-      p {
-        font-size: 0.8rem;
-      }
-    }
-  }
-}
-
-.six-days-card {
-  display: flex;
-  flex-direction: column;
-  filter: drop-shadow(0px 4px 4px $card-shadow);
-  margin: 0 0.5rem;
-
-  .upper-container {
-    display: flex;
-    background-color: rgb(145, 145, 235);
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.7rem;
-    border-radius: 10px;
-    padding: 0 1rem;
-    z-index: 99;
-    filter: drop-shadow(0px 4px 4px $card-shadow);
-    margin-bottom: 1rem;
-
-    .temperature {
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
-
-    .card-date {
-      font-size: 0.8rem;
-      width: fit-content;
-      white-space: nowrap;
-    }
-
-    .max-temp {
-      font-size: 1rem;
-    }
-
-    .min-temp {
-      font-size: 0.8rem;
-    }
-
-    .six-days-icon {
-      height: 48px;
-      width: 48px;
-    }
-
-    span {
-      cursor: pointer;
-    }
-  }
-
-  .six-days-info {
-    display: none;
-    flex-direction: column;
-    background-color: $card-background;
-    border-radius: 10px;
-    position: relative;
-    top: -0.7rem;
-    margin: 0 1rem 0 1rem;
-    padding: 1rem 0.5rem 0.5rem 0.5rem;
-
-    .more-information {
-      display: flex;
-      justify-content: space-between;
-    }
-  }
-
-  .displayed-card {
-    display: flex;
-    margin-bottom: 0;
-  }
-}
-
-.load-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-  margin: 5rem 1rem;
-
-  .loader {
-    border: 8px solid #f3f3f3; /* Light grey */
-    border-top: 8px solid #42708f; /* Blue */
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    animation: spin 2s linear infinite;
-  }
-
-  .error {
-    height: 100px;
-    width: 100px;
-    background: #d45f11;
-    border-radius: 50%;
-    position: relative;
-    &:after {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      content: '\274c';
-      font-size: 50px;
-      color: #fff;
-      line-height: 100px;
-      text-align: center;
-    }
-  }
-  .small-x:after {
-    content: '\d7';
+  .icon-description {
+    text-transform: capitalize;
   }
 }
 
 .back-to-top {
-  display: flex;
-  justify-content: space-around;
-
-  a {
-    margin: auto;
-    text-decoration: none;
-    margin-bottom: 0;
-    padding: 1rem;
-  }
-  :visited {
-    color: black;
-  }
+  margin: 1rem auto;
 }
 
-footer {
-  a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 0.5rem 0;
-    background-color: #df7b23;
-    text-decoration: none;
-
-    .github-icon {
-      width: 32px;
-      height: 32px;
-    }
-  }
-
-  a:visited {
-    color: white;
-  }
+.load-container {
+  min-height: 60vh;
+  padding: 4rem 0;
 }
 
 @keyframes spin {
@@ -393,104 +97,9 @@ footer {
     transform: rotate(360deg);
   }
 }
-
 @media (min-width: 700px) {
-  .search-container {
-    margin: 2rem;
-  }
-
-  .top-container {
-    #date {
-      font-size: 1.2rem;
-    }
-
-    #city-location {
-      font-size: 1.6rem;
-    }
-  }
-
-  .icon-description {
-    font-size: 1rem;
-  }
-
-  .cards {
-    gap: 1rem;
-
-    .title-details {
-      font-size: 1.2rem;
-    }
-
-    .card-hourly {
-      display: flex;
-      justify-content: space-around;
-    }
-
-    .six-days-card {
-      .upper-container {
-        .temperature {
-          gap: 1rem;
-        }
-
-        .max-temp {
-          font-size: 1.2rem;
-        }
-        .min-temp {
-          font-size: 0.9rem;
-        }
-
-        .six-days-icon {
-          height: 60px;
-          width: 60px;
-        }
-      }
-    }
-  }
 }
-
 @media (min-width: 900px) {
-  .sections {
-    .section-name {
-      font-size: 1.6rem;
-      letter-spacing: 2px;
-    }
-  }
-
-  .top-container {
-    .location-info {
-      #date {
-        font-size: 1.2rem;
-      }
-      #city-location {
-        font-size: 1.4rem;
-      }
-    }
-  }
-
-  .more-information {
-    font-size: 1.2rem;
-  }
 }
-
 @media (min-width: 1100px) {
-  .daily-details {
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  .six-days-card {
-    margin-bottom: 1rem;
-    .upper-container {
-      justify-content: space-around;
-    }
-    .six-days-info {
-      display: flex;
-      gap: 1rem;
-      padding: 1rem 2rem;
-    }
-    span {
-      display: none;
-    }
-  }
 }
