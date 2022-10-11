@@ -60,7 +60,7 @@ header {
     text-decoration: underline;
     text-underline-offset: 4px;
 
-    &:hover {
+    .section-name:hover {
       cursor: pointer;
     }
 
@@ -72,6 +72,22 @@ header {
       background-color: #7ca0e2b6;
       padding: 0.4rem 1rem;
       border-radius: 8px;
+    }
+  }
+}
+
+@media (min-width: 1280px) {
+  header {
+    padding: 1.5rem 8rem;
+
+    .search-container {
+      .search-input {
+        padding-left: 1rem;
+      }
+
+      .search-btn {
+        margin-right: 0;
+      }
     }
   }
 }
