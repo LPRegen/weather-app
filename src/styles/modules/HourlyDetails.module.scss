@@ -50,3 +50,13 @@
     }
   }
 }
+
+@media (min-width: 640px) {
+  .daily-details {
+    .cards {
+      .card-hourly {
+        padding: 1rem 4rem 2rem 4rem;
+      }
+    }
+  }
+}
