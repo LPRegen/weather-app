@@ -1,3 +1,290 @@
+header {
+  display: grid;
+  gap: 0.5rem;
+  padding: 1.5rem 1rem;
+  box-shadow: 0 4px 12px 2px rgba(0, 0, 0, 0.5490196078);
+  background-color: rgba(158, 185, 236, 0.6);
+}
+header .search-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header .search-container .search-input {
+  width: 100%;
+  margin-right: 2rem;
+  padding: 0.8rem 0.3rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  outline: solid 1px #94b1e6;
+}
+header .search-container .search-input:focus, header .search-container .search-input:active {
+  outline: 2px solid #6a90d6;
+}
+header .search-container .search-btn {
+  all: unset;
+  display: grid;
+  align-content: center;
+  padding: 0.8rem;
+  border-radius: 10px;
+  margin-right: 1rem;
+  outline: solid 1px #94b1e6;
+  background-color: #7ca0e2;
+}
+header .search-container .search-btn:hover {
+  cursor: pointer;
+  background-color: #3564bd;
+}
+header .search-container .search-btn:focus, header .search-container .search-btn:active {
+  outline: 3px solid #3564bd;
+}
+header .sections {
+  display: flex;
+  padding: 0 2rem;
+  margin-top: 1rem;
+  justify-content: space-around;
+  align-items: center;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+header .sections .section-name:hover {
+  cursor: pointer;
+}
+header .sections .section-name {
+  padding: 0.4rem 1rem;
+}
+header .sections .active-section {
+  background-color: rgba(124, 160, 226, 0.7137254902);
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+}
+
+@media (min-width: 1280px) {
+  header {
+    padding: 1.5rem 8rem;
+  }
+  header .search-container .search-input {
+    padding-left: 1rem;
+  }
+  header .search-container .search-btn {
+    margin-right: 0;
+  }
+}
+.top-container {
+  display: flex;
+  margin: 3rem 3rem 1.5rem 3rem;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.top-container .location-info {
+  display: grid;
+  gap: 0.3rem;
+}
+.top-container .location-info #date {
+  font-size: 0.9rem;
+}
+.top-container .location-info #city-location {
+  font-size: 1.5rem;
+}
+.top-container .location-info #country-location {
+  font-size: 1.3rem;
+}
+
+.current-feels-temp {
+  display: flex;
+  position: relative;
+  justify-content: space-around;
+}
+.current-feels-temp .temp-container {
+  display: grid;
+  gap: 0.4rem;
+  justify-items: center;
+  align-self: flex-end;
+}
+
+.today-details {
+  display: grid;
+}
+.today-details .more-information {
+  display: flex;
+  margin: 0.2rem 2rem;
+  justify-content: space-between;
+}
+
+.daily-details .title-details {
+  font-size: 1.4rem;
+  margin-bottom: 3rem;
+}
+.daily-details .cards {
+  display: grid;
+  margin-top: 1.5rem;
+  gap: 1rem;
+}
+.daily-details .cards .card-hourly {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4rem 1.6rem 1.4rem 1.6rem;
+  background-color: #bbcef1;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.5490196078);
+}
+.daily-details .cards .card-hourly .detail-hours {
+  padding-top: 1rem;
+}
+.daily-details .cards .card-hourly .detail-hours .hour {
+  font-size: 1.2rem;
+}
+.daily-details .cards .card-hourly .detail-hours .detail-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-top: 1rem;
+}
+.daily-details .cards .card-hourly .weather-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.daily-details .cards .card-hourly .weather-icon .hourly-icon {
+  display: flex;
+  justify-content: center;
+  width: 100px;
+}
+.daily-details .cards .card-hourly .weather-icon .icon-description {
+  text-transform: capitalize;
+  display: flex;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .daily-details .cards .card-hourly {
+    padding: 1rem 4rem 2rem 4rem;
+  }
+}
+@media (min-width: 1280px) {
+  .daily-details .cards {
+    display: grid;
+    grid: auto/repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0 0.8rem 0;
+  margin-top: 1rem;
+  background-color: rgba(158, 185, 236, 0.6);
+  box-shadow: 0 -2px 12px -2px rgba(0, 0, 0, 0.5490196078);
+}
+footer .github-icon {
+  width: 32px;
+}
+footer .link-profile {
+  padding: 0.3rem 0.2rem;
+}
+
+.general-container > .six-days-details {
+  margin-top: 2rem;
+  font-size: 1.4rem;
+}
+
+.general-container .cards > .six-days-card {
+  display: grid;
+}
+.general-container .cards > .six-days-card .upper-container {
+  display: flex;
+  background-color: #a2c9f7;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.7rem;
+  border-radius: 10px;
+  padding: 0 1rem;
+  z-index: 99;
+  box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.5490196078);
+  margin-bottom: 1rem;
+}
+.general-container .cards > .six-days-card .upper-container .temperature {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.general-container .cards > .six-days-card .upper-container .card-date {
+  font-size: 0.8rem;
+  width: fit-content;
+  white-space: nowrap;
+}
+.general-container .cards > .six-days-card .upper-container .max-temp {
+  font-size: 1rem;
+}
+.general-container .cards > .six-days-card .upper-container .min-temp {
+  font-size: 0.8rem;
+}
+.general-container .cards > .six-days-card .upper-container .six-days-icon {
+  height: 48px;
+  width: 48px;
+}
+.general-container .cards > .six-days-card .upper-container span {
+  cursor: pointer;
+}
+.general-container .cards > .six-days-card .six-days-info {
+  display: none;
+  flex-direction: column;
+  gap: 0.4rem;
+  background-color: #a7c6e9;
+  border-radius: 10px;
+  position: relative;
+  top: -0.7rem;
+  margin: 0 1rem 0 1rem;
+  padding: 1rem 0.5rem 0.5rem 0.5rem;
+}
+.general-container .cards > .six-days-card .six-days-info .more-information {
+  display: flex;
+  justify-content: space-between;
+}
+.general-container .cards > .six-days-card .displayed-card {
+  display: flex;
+  margin-bottom: 0;
+}
+
+@media (min-width: 640px) {
+  .general-container .cards > .six-days-card .upper-container {
+    height: 4rem;
+  }
+  .upper-container .general-container .cards > .six-days-card .displayed-card {
+    height: 4rem;
+  }
+  .general-container .cards > .six-days-card .six-days-info {
+    padding: 2.5rem 1.5rem 2rem 1.5rem;
+    gap: 1rem;
+  }
+  .general-container .cards > .six-days-card .displayed-card {
+    padding-bottom: 1.2rem;
+    margin-bottom: 0;
+    padding: 1.6rem 1.5rem 1rem 1.5rem;
+  }
+}
+@media (min-width: 1280px) {
+  .general-container .cards > .six-days-card .upper-container {
+    height: 4rem;
+    margin-bottom: 2rem;
+    padding: 0.5rem 4rem 0.5rem 4rem;
+  }
+  .upper-container .general-container .cards > .six-days-card .displayed-card {
+    height: 4rem;
+    margin-bottom: 2rem;
+    padding: 0.5rem 4rem 0.5rem 4rem;
+  }
+  .general-container .cards > .six-days-card .six-days-info {
+    padding: 2.5rem 1.5rem 2rem 1.5rem;
+    gap: 1rem;
+  }
+  .general-container .cards > .six-days-card .displayed-card {
+    padding-bottom: 1.2rem;
+    margin-bottom: 0;
+    padding: 1.6rem 2.5rem 1rem 2.5rem;
+  }
+}
 *,
 *::before,
 *::after {
@@ -20,7 +307,7 @@ body {
   flex-direction: column;
   line-height: 1.5;
   font-family: "Roboto Flex", sans-serif;
-  background-color: #e9cfcf;
+  background-color: #d5dce4;
 }
 
 img,
@@ -51,12 +338,52 @@ h6 {
   isolation: isolate;
 }
 
+.general-container {
+  display: grid;
+  gap: 3rem;
+  margin: 1rem;
+  min-height: auto;
+}
+
+.weather-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.weather-details #weather-icon {
+  width: 120px;
+}
+.weather-details .icon-description {
+  text-transform: capitalize;
+}
+
+.back-to-top {
+  margin: 1rem auto;
+}
+
+.load-container {
+  min-height: 60vh;
+  padding: 4rem 0;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+@media (min-width: 1280px) {
+  .general-container {
+    margin: 4rem 8rem 4rem 8rem;
+    gap: 5rem;
+  }
+}
+@media (min-width: 1536px) {
+  .general-container {
+    margin: 4rem 10rem 4rem 10rem;
+    gap: 5rem;
   }
 }
 
