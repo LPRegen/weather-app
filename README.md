@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# weather-app
-Weather App
-=======
 <div id="top" align="center">
 
 [![Top][top-shield]][top-url]
@@ -48,7 +44,6 @@ Weather App
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
-    <li><a href="#features">Features</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -79,16 +74,6 @@ Weather App
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## Features
-
-- [x] Documentate project.
-- [ ] CSS Animations.
-- [ ] Implement splash screen.
-- [ ] Store previously searched locations.
-- [ ] Be able to change between previously stored locations.
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 ## Contact
 
 Manuel Escribano - [LinkedIn](https://www.linkedin.com/in/manuel-escribano-lpregen/)
@@ -111,4 +96,3 @@ Manuel Escribano - [LinkedIn](https://www.linkedin.com/in/manuel-escribano-lpreg
 [css-shield]: https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white?
 [webpack-shield]: https://img.shields.io/badge/Webpack-blue?style=for-the-badge&logo=appveyor
 [sass-shield]: https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white
->>>>>>> features
