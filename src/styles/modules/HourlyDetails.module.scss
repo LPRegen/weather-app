@@ -1,6 +1,7 @@
 .daily-details {
   .title-details {
     font-size: 1.4rem;
+    margin-bottom: 3rem;
   }
 
   .cards {
@@ -11,12 +12,13 @@
     .card-hourly {
       display: flex;
       justify-content: space-between;
-      padding: 1rem 0.6rem;
+      padding: 0.4rem 1.6rem 1.4rem 1.6rem;
       background-color: #bbcef1;
       border-radius: 10px;
       box-shadow: 0 4px 10px -2px #0000008c;
 
       .detail-hours {
+        padding-top: 1rem;
         .hour {
           font-size: 1.2rem;
         }
@@ -30,7 +32,6 @@
       }
 
       .weather-icon {
-        width: fit-content;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -38,6 +39,7 @@
         .hourly-icon {
           display: flex;
           justify-content: center;
+          width: 100px;
         }
 
         .icon-description {
@@ -46,6 +48,26 @@
           justify-content: center;
         }
       }
+    }
+  }
+}
+
+@media (min-width: 640px) {
+  .daily-details {
+    .cards {
+      .card-hourly {
+        padding: 1rem 4rem 2rem 4rem;
+      }
+    }
+  }
+}
+
+@media (min-width: 1280px) {
+  .daily-details {
+    .cards {
+      display: grid;
+      grid: auto / repeat(2, 1fr);
+      gap: 2rem;
     }
   }
 }

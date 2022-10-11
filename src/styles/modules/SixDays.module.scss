@@ -52,6 +52,7 @@
     .six-days-info {
       display: none;
       flex-direction: column;
+      gap: 0.4rem;
       background-color: #a7c6e9;
       border-radius: 10px;
       position: relative;
@@ -68,6 +69,60 @@
     .displayed-card {
       display: flex;
       margin-bottom: 0;
+    }
+  }
+}
+
+@media (min-width: 640px) {
+  .general-container {
+    .cards > .six-days-card {
+      .upper-container {
+        height: 4rem;
+      }
+
+      .upper-container & .displayed-card {
+        height: 4rem;
+      }
+
+      .six-days-info {
+        padding: 2.5rem 1.5rem 2rem 1.5rem;
+        gap: 1rem;
+      }
+
+      .displayed-card {
+        padding-bottom: 1.2rem;
+        margin-bottom: 0;
+        padding: 1.6rem 1.5rem 1rem 1.5rem;
+      }
+    }
+  }
+}
+
+@media (min-width: 1280px) {
+  .general-container {
+    .cards > .six-days-card {
+      .upper-container {
+        height: 4rem;
+        margin-bottom: 2rem;
+        padding: 0.5rem 4rem 0.5rem 4rem;
+      }
+
+      .upper-container & .displayed-card {
+        height: 4rem;
+        margin-bottom: 2rem;
+        padding: 0.5rem 4rem 0.5rem 4rem;
+      }
+
+      .six-days-info {
+        padding: 2.5rem 1.5rem 2rem 1.5rem;
+        gap: 1rem;
+      }
+
+      .displayed-card {
+        padding-bottom: 1.2rem;
+        margin-bottom: 0;
+        padding: 1.6rem 2.5rem 1rem 2.5rem;
+      }
     }
   }
 }
