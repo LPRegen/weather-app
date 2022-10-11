@@ -60,3 +60,13 @@
     }
   }
 }
+
+@media (min-width: 1280px) {
+  .daily-details {
+    .cards {
+      display: grid;
+      grid: auto / repeat(2, 1fr);
+      gap: 2rem;
+    }
+  }
+}
