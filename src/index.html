@@ -32,9 +32,15 @@
           placeholder="Enter a city name"
           required
         />
-        <div class="search-btn" id="search-icon">
-          <span class="material-symbols-outlined" title="Search"> search </span>
-        </div>
+        <button
+          class="search-btn"
+          id="search-icon"
+          aria-label="Search location"
+        >
+          <span class="material-symbols-outlined" title="Search location">
+            search
+          </span>
+        </button>
       </form>
       <div class="sections">
         <h4 class="section-name active-section" id="today-section">Today</h4>
@@ -48,6 +54,11 @@
       <a href="#" class="back-to-top" title="Back to top">Back to top</a>
     </div>
     <footer>
+      <img
+        src="../src/assets/icons/github-64.svg"
+        alt="Github icon"
+        class="github-icon"
+      />
       <a
         href="https://github.com/LPRegen"
         target="_blank"
@@ -55,11 +66,6 @@
         class="link-profile"
         title="LPRegen's profile"
       >
-        <img
-          src="../src/assets/icons/github-64.svg"
-          alt="Github icon"
-          class="github-icon"
-        />
         <p>| LPRegen</p>
       </a>
     </footer>
