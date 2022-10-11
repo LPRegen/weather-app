@@ -1,0 +1,17 @@
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0 0.8rem 0;
+  margin-top: 1rem;
+  background-color: rgba(158, 185, 236, 0.6);
+  box-shadow: 0 -2px 12px -2px #0000008c;
+
+  .github-icon {
+    width: 32px;
+  }
+
+  .link-profile {
+    padding: 0.3rem 0.2rem;
+  }
+}

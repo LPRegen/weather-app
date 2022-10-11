@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -19,13 +19,13 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
     />
     <link rel="stylesheet" href="./style.css" />
-    <title>Weather App</title>
-    <script defer="defer" src="main.js?c35e0d0bb4fa8f18d9e6"></script>
+    <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
     <header>
       <form action="" class="search-container">
         <input
+          type="text"
           name="location"
           class="search-input"
           id="location-search"
@@ -37,9 +37,9 @@
           id="search-icon"
           aria-label="Search location"
         >
-          <span class="material-symbols-outlined" title="Search location"
-            >search</span
-          >
+          <span class="material-symbols-outlined" title="Search location">
+            search
+          </span>
         </button>
       </form>
       <div class="sections">
@@ -48,6 +48,7 @@
         <h4 class="section-name" id="six-days-section">6 Days</h4>
       </div>
     </header>
+
     <div class="general-container"></div>
     <div class="back-to-top">
       <a href="#" class="back-to-top" title="Back to top">Back to top</a>
@@ -64,8 +65,9 @@
         rel="noopener noreferrer"
         class="link-profile"
         title="LPRegen's profile"
-        ><p>| LPRegen</p></a
       >
+        <p>| LPRegen</p>
+      </a>
     </footer>
   </body>
 </html>

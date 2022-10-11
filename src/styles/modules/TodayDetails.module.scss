@@ -1,0 +1,9 @@
+.today-details {
+  display: grid;
+
+  .more-information {
+    display: flex;
+    margin: 0.2rem 2rem;
+    justify-content: space-between;
+  }
+}

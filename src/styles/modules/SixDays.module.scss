@@ -1,0 +1,73 @@
+.general-container > .six-days-details {
+  margin-top: 2rem;
+  font-size: 1.4rem;
+}
+
+.general-container {
+  .cards > .six-days-card {
+    display: grid;
+
+    .upper-container {
+      display: flex;
+      background-color: #a2c9f7;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.7rem;
+      border-radius: 10px;
+      padding: 0 1rem;
+      z-index: 99;
+      box-shadow: 0 4px 10px -2px #0000008c;
+      margin-bottom: 1rem;
+
+      .temperature {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+      }
+
+      .card-date {
+        font-size: 0.8rem;
+        width: fit-content;
+        white-space: nowrap;
+      }
+
+      .max-temp {
+        font-size: 1rem;
+      }
+
+      .min-temp {
+        font-size: 0.8rem;
+      }
+
+      .six-days-icon {
+        height: 48px;
+        width: 48px;
+      }
+
+      span {
+        cursor: pointer;
+      }
+    }
+
+    .six-days-info {
+      display: none;
+      flex-direction: column;
+      background-color: #a7c6e9;
+      border-radius: 10px;
+      position: relative;
+      top: -0.7rem;
+      margin: 0 1rem 0 1rem;
+      padding: 1rem 0.5rem 0.5rem 0.5rem;
+
+      .more-information {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+
+    .displayed-card {
+      display: flex;
+      margin-bottom: 0;
+    }
+  }
+}
