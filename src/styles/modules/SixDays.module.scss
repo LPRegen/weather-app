@@ -97,3 +97,32 @@
     }
   }
 }
+
+@media (min-width: 1280px) {
+  .general-container {
+    .cards > .six-days-card {
+      .upper-container {
+        height: 4rem;
+        margin-bottom: 2rem;
+        padding: 0.5rem 4rem 0.5rem 4rem;
+      }
+
+      .upper-container & .displayed-card {
+        height: 4rem;
+        margin-bottom: 2rem;
+        padding: 0.5rem 4rem 0.5rem 4rem;
+      }
+
+      .six-days-info {
+        padding: 2.5rem 1.5rem 2rem 1.5rem;
+        gap: 1rem;
+      }
+
+      .displayed-card {
+        padding-bottom: 1.2rem;
+        margin-bottom: 0;
+        padding: 1.6rem 2.5rem 1rem 2.5rem;
+      }
+    }
+  }
+}

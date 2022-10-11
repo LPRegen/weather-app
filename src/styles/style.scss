@@ -109,3 +109,10 @@ h6 {
     gap: 5rem;
   }
 }
+
+@media (min-width: 1536px) {
+  .general-container {
+    margin: 4rem 10rem 4rem 10rem;
+    gap: 5rem;
+  }
+}
