@@ -72,9 +72,10 @@ h6 {
 }
 
 .weather-details {
-  display: grid;
-  justify-content: center;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
   .icon-description {
     text-transform: capitalize;
   }
