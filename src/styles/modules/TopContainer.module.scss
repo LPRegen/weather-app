@@ -1,7 +1,8 @@
 .top-container {
-  display: grid;
-  margin-top: 2rem;
-  justify-content: center;
+  display: flex;
+  margin: 3rem 3rem 1.5rem 3rem;
+  justify-content: space-between;
+  align-items: flex-end;
 
   .location-info {
     display: grid;
